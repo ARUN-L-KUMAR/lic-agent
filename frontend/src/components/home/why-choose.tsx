@@ -1,0 +1,193 @@
+"use client";
+
+import { CheckCircle, HeadphonesIcon, FileSearch, Clock, Award } from "lucide-react";
+
+const reasons = [
+  {
+    icon: Award,
+    title: "Licensed & Experienced",
+    description:
+      "A licensed LIC agent with over 10 years of experience helping families make informed insurance decisions.",
+  },
+  {
+    icon: FileSearch,
+    title: "Plan Expertise",
+    description:
+      "In-depth knowledge of LIC's diverse portfolio — from term insurance to pension plans, I help you understand your options.",
+  },
+  {
+    icon: HeadphonesIcon,
+    title: "Ongoing Support",
+    description:
+      "I am with you from plan selection through policy issuance, claims, and renewals — not just at the point of sale.",
+  },
+  {
+    icon: Clock,
+    title: "Responsive Service",
+    description:
+      "Quick responses to your queries via chat, call, WhatsApp, or in-person meetings at a time convenient to you.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Transparent Information",
+    description:
+      "Clear, honest explanations without jargon. I present plan information accurately so you can decide with confidence.",
+  },
+];
+
+export function WhyChooseSection() {
+  return (
+    <section className="section" style={{ background: "var(--bg)" }}>
+      <div className="container-site">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "4rem",
+            alignItems: "center",
+          }}
+        >
+          {/* Left */}
+          <div>
+            <div className="section-label">Why Work With Me</div>
+            <h2 className="section-title">
+              Your Trusted LIC Insurance Partner
+            </h2>
+            <p
+              style={{
+                fontSize: "1rem",
+                color: "var(--text-muted)",
+                lineHeight: 1.7,
+                marginBottom: "2rem",
+              }}
+            >
+              Choosing the right insurance plan is an important financial decision.
+              As your LIC agent, I am committed to providing accurate information,
+              genuine service, and long-term support.
+            </p>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              {reasons.map(({ icon: Icon, title, description }) => (
+                <div
+                  key={title}
+                  style={{
+                    display: "flex",
+                    gap: "1rem",
+                    padding: "1.25rem",
+                    background: "var(--surface)",
+                    borderRadius: "var(--radius-lg)",
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--primary-50)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon size={20} style={{ color: "#003B73" }} />
+                  </div>
+                  <div>
+                    <h4
+                      style={{
+                        fontSize: "0.9375rem",
+                        fontWeight: 700,
+                        color: "var(--text-primary)",
+                        marginBottom: "0.375rem",
+                      }}
+                    >
+                      {title}
+                    </h4>
+                    <p
+                      style={{
+                        fontSize: "0.875rem",
+                        color: "var(--text-muted)",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right — agent info card */}
+          <div style={{ display: "none" }} className="why-right">
+            <div
+              className="card"
+              style={{
+                padding: "2rem",
+                borderTop: "4px solid #003B73",
+              }}
+            >
+              <div
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: "50%",
+                  background: "#003B73",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#C9A227",
+                  fontSize: "2rem",
+                  fontWeight: 800,
+                  marginBottom: "1.25rem",
+                }}
+              >
+                LIC
+              </div>
+              <h3
+                style={{
+                  fontSize: "1.25rem",
+                  fontWeight: 700,
+                  color: "var(--text-primary)",
+                  marginBottom: "0.375rem",
+                }}
+              >
+                LIC Agent
+              </h3>
+              <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
+                Licensed LIC Agent | Code: LIC-AGENT-001
+              </p>
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.7,
+                  marginBottom: "1.5rem",
+                }}
+              >
+                I am a certified LIC agent with over 10 years of experience helping
+                families across Tamil Nadu secure their financial future through the
+                right insurance plans.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                <a href="tel:+919876543210" className="btn btn-primary" style={{ justifyContent: "center" }}>
+                  Call Now
+                </a>
+                <a href="/book-appointment" className="btn btn-secondary" style={{ justifyContent: "center", textDecoration: "none", display: "flex", alignItems: "center" }}>
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @media (min-width: 900px) {
+          .why-right { display: block !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
