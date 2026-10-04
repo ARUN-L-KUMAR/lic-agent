@@ -18,6 +18,9 @@ async def get_redis_pool() -> aioredis.Redis:
             encoding="utf-8",
             decode_responses=True,
             max_connections=50,
+            # Fail fast when Redis is not running (Windows takes ~2s per refused connection).
+            socket_connect_timeout=0.3,
+            socket_timeout=1.0,
         )
     return _redis_pool
 

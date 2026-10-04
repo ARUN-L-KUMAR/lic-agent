@@ -64,6 +64,22 @@ async def register(
         user.first_name,
         user.email_verification_token,
     )
+    # Greet the new customer
+    background_tasks.add_task(
+        email_service.send_welcome_email,
+        user.email,
+        user.first_name,
+    )
+    # Let the agent know a new customer signed up
+    if settings.AGENT_EMAIL:
+        background_tasks.add_task(
+            email_service.send_new_registration_alert,
+            settings.AGENT_EMAIL,
+            user.first_name,
+            user.last_name,
+            user.email,
+            user.phone,
+        )
     return {"message": "Registration successful. Please verify your email."}
 
 

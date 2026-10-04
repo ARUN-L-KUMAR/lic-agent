@@ -8,18 +8,18 @@ import type { Plan } from "@/types";
 
 function PlanCard({ plan }: { plan: Plan }) {
   const categoryColors: Record<string, string> = {
-    Protection: "#003B73",
+    Protection: "#004B87",
     Savings: "#198754",
     Endowment: "#0066B3",
     "Money Back": "#7c3aed",
     "Whole Life": "#0066B3",
     Pension: "#7c3aed",
     "Child Plans": "#0066B3",
-    ULIP: "#C9A227",
+    ULIP: "#FFCC00",
     Health: "#D92D20",
     "Micro Insurance": "#667085",
   };
-  const color = categoryColors[plan.category] || "#003B73";
+  const color = categoryColors[plan.category] || "#004B87";
 
   return (
     <div className="plan-card">

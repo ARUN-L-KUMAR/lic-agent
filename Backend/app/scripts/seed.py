@@ -20,8 +20,21 @@ from app.models.site_settings import SiteSettings
 from app.models.blog import BlogCategory
 
 
+AGENT_NAME = "LAKSHMI NARAYANAN S"
+AGENT_CODE = "3572"
+AGENT_PHONE = "+91 9787445506"
+AGENT_EMAIL = "laxamans1980@gmail.com"
+AGENT_LOCATION = "Ranipet, Vellore, Tamil Nadu, India"
+AGENT_IMAGE = "/profile.png"
+AGENT_HERO_IMAGE = "/agent.png"
+AGENT_BIO = (
+    "I am an LIC agent based in Ranipet, Vellore, helping families understand "
+    "LIC insurance plans and make informed decisions."
+)
+
+
 async def seed_users(db: AsyncSession):
-    """Create admin, agent, and demo customer users."""
+    """Create admin and agent users."""
     print("Seeding users...")
 
     # Admin
@@ -38,9 +51,10 @@ async def seed_users(db: AsyncSession):
 
     # Agent
     agent = User(
-        email=settings.AGENT_EMAIL,
+        email=AGENT_EMAIL,
         first_name=settings.AGENT_FIRST_NAME,
         last_name=settings.AGENT_LAST_NAME,
+        phone=AGENT_PHONE,
         password_hash=hash_password(settings.AGENT_PASSWORD),
         role=UserRole.AGENT,
         is_active=True,
@@ -48,49 +62,23 @@ async def seed_users(db: AsyncSession):
     )
     db.add(agent)
 
-    # Demo customer
-    customer = User(
-        email="customer@demo.com",
-        first_name="Demo",
-        last_name="Customer",
-        password_hash=hash_password("Customer@123456"),
-        role=UserRole.CUSTOMER,
-        is_active=True,
-        is_verified=True,
-    )
-    db.add(customer)
     await db.flush()
 
     # Agent profile
     agent_profile = AgentProfile(
         user_id=agent.id,
-        agent_code="LIC-AGENT-3072",
-        license_number="IC-AGENT-12345",
-        experience_years=10,
-        bio=(
-            "I am a certified LIC agent with over 20 years of experience helping families "
-            "secure their financial future through the right insurance plans."
-        ),
+        agent_code=AGENT_CODE,
+        experience_years=None,
+        bio=AGENT_BIO,
         specialization=["Term Insurance", "Endowment", "Child Plans", "Pension"],
-        office_address="Ranipet, Tamil Nadu, India",
-        office_phone="+91-9787445506",
+        office_address=AGENT_LOCATION,
+        office_phone=AGENT_PHONE,
+        profile_image=AGENT_IMAGE,
     )
     db.add(agent_profile)
 
-    # Customer profile
-    customer_profile = CustomerProfile(
-        user_id=customer.id,
-        occupation="Software Engineer",
-        city="Chennai",
-        state="Tamil Nadu",
-        pincode="600001",
-        family_size=3,
-        dependents=1,
-    )
-    db.add(customer_profile)
-
     await db.flush()
-    print(f"  Created: {admin.email}, {agent.email}, {customer.email}")
+    print(f"  Created: {admin.email}, {agent.email}")
 
 
 async def seed_plan_categories(db: AsyncSession):
@@ -171,8 +159,8 @@ async def seed_faqs(db: AsyncSession):
         ),
         (
             "What is this website? Is this the official LIC website?",
-            "This website is operated by an individual LIC agent for informational and "
-            "customer-service purposes. It is NOT the official LIC website. "
+            "This website is operated by an LIC agent for informational and "
+            "customer-service purposes. It is not the official LIC website. "
             "The official LIC website is www.licindia.in. Policy information here is "
             "for general understanding and subject to official LIC documents.",
             "About"
@@ -189,9 +177,15 @@ async def seed_site_settings(db: AsyncSession):
     """Create default site settings."""
     print("Seeding site settings...")
     settings_obj = SiteSettings(
-        business_name="LIC Agent — Your Trusted Insurance Partner",
-        agent_name="LIC Agent",
-        agent_code="LIC-AGENT-001",
+        business_name="LAKSHMI NARAYANAN S — LIC Agent",
+        agent_name=AGENT_NAME,
+        agent_code=AGENT_CODE,
+        phone=AGENT_PHONE,
+        whatsapp="919787445506",
+        email=AGENT_EMAIL,
+        office_address=AGENT_LOCATION,
+        profile_image_url=AGENT_IMAGE,
+        hero_image_url=AGENT_HERO_IMAGE,
         tagline="Plan Today. Protect Tomorrow.",
         hero_headline="Secure Your Family's Future",
         hero_subtext=(
@@ -199,20 +193,11 @@ async def seed_site_settings(db: AsyncSession):
             "From term insurance to pension plans, we help you make informed decisions "
             "for financial protection, child education, and retirement planning."
         ),
-        about_text=(
-            "As a licensed LIC agent with over 10 years of experience, I am committed "
-            "to helping families and individuals across Tamil Nadu find the right "
-            "insurance solutions for their needs. My goal is to simplify the process "
-            "of choosing insurance so you can focus on what matters most."
-        ),
-        years_experience="10+",
-        customers_served="500+",
-        plans_supported="30+",
-        service_locations="Chennai & Nearby",
-        working_hours="Mon–Sat: 9:00 AM – 6:00 PM IST",
+        about_text=AGENT_BIO,
+        service_locations="Ranipet, Vellore",
         main_disclaimer=(
-            "This website is operated by an individual LIC agent for informational and "
-            "customer-service purposes. It is NOT the official LIC website. "
+            "This website is operated by an LIC agent for informational and "
+            "customer-service purposes. It is not the official LIC website. "
             "Policy information is subject to official LIC policy documents, "
             "terms, conditions, and applicable rules."
         ),
@@ -229,9 +214,9 @@ async def seed_site_settings(db: AsyncSession):
             "Illustrative estimate only. Actual policy values depend on the specific "
             "policy terms, underwriting, applicable bonuses/rates, and official LIC documentation."
         ),
-        site_title="LIC Insurance Agent — Trusted Plans & Expert Advice",
+        site_title="LAKSHMI NARAYANAN S — LIC Agent, Ranipet, Vellore",
         site_description=(
-            "Connect with a trusted LIC agent for expert guidance on life insurance, "
+            "Connect with LAKSHMI NARAYANAN S, LIC agent in Ranipet, Vellore, for expert guidance on life insurance, "
             "term plans, pension plans, child education plans, and more."
         ),
     )
@@ -434,6 +419,9 @@ async def seed_plans(db: AsyncSession):
 
 async def main():
     print("Starting database seed...")
+    import app.models  # noqa: F401  (registers all tables on Base.metadata)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     async with async_session_factory() as db:
         try:
             await seed_users(db)
@@ -447,7 +435,6 @@ async def main():
             print("\nDefault credentials:")
             print(f"  Admin:    {settings.ADMIN_EMAIL} / {settings.ADMIN_PASSWORD}")
             print(f"  Agent:    {settings.AGENT_EMAIL} / {settings.AGENT_PASSWORD}")
-            print(f"  Customer: customer@demo.com / Customer@123456")
             print("\n[NOTE] Change all passwords before production deployment!")
         except Exception as e:
             await db.rollback()

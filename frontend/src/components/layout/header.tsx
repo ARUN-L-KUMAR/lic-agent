@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoMark } from "@/components/brand/logo";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
@@ -11,14 +12,15 @@ import {
   Calculator,
   MessageCircle,
   FileText,
-  BookOpen,
   Info,
+  Camera,
   Home,
   LayoutDashboard,
 } from "lucide-react";
 import { useAuthStore } from "@/stores/auth";
 import { authService } from "@/services/auth";
 import { useRouter } from "next/navigation";
+import { useSiteSettings } from "@/lib/use-site-settings";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
@@ -44,9 +46,16 @@ const navLinks = [
       { href: "/calculators/child-education", label: "Child Education" },
     ],
   },
-  { href: "/about", label: "About", icon: Info },
-  { href: "/blog", label: "Blog", icon: BookOpen },
-  { href: "/contact", label: "Contact", icon: Phone },
+  {
+    label: "About",
+    icon: Info,
+    children: [
+      { href: "/about", label: "About the Agent" },
+      { href: "/blog", label: "Blog" },
+      { href: "/contact", label: "Contact" },
+    ],
+  },
+  { href: "/gallery", label: "Gallery", icon: Camera },
 ];
 
 export function Header() {
@@ -55,11 +64,27 @@ export function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { user, isAuthenticated, logout } = useAuthStore();
   const router = useRouter();
+  const site = useSiteSettings();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest("[data-nav-dropdown]")) setActiveDropdown(null);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveDropdown(null);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const handleLogout = async () => {
@@ -76,7 +101,7 @@ export function Header() {
       {/* ── Disclaimer Banner ── */}
       <div
         style={{
-          background: "#003B73",
+          background: "#004B87",
           color: "rgba(255,255,255,0.85)",
           fontSize: "0.75rem",
           textAlign: "center",
@@ -84,10 +109,10 @@ export function Header() {
           lineHeight: 1.4,
         }}
       >
-        This website is operated by an individual LIC agent. It is NOT the official LIC website.{" "}
+        This website is operated by {site.agent_name}, LIC Agent. It is not the official LIC website.{" "}
         <Link
           href="/disclaimer"
-          style={{ color: "#C9A227", textDecoration: "underline" }}
+          style={{ color: "#FFCC00", textDecoration: "underline" }}
         >
           Learn more
         </Link>
@@ -111,6 +136,7 @@ export function Header() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              gap: "1rem",
               height: "72px",
             }}
           >
@@ -122,34 +148,21 @@ export function Header() {
                 alignItems: "center",
                 gap: "0.625rem",
                 textDecoration: "none",
+                flexShrink: 0,
               }}
             >
-              <div
-                style={{
-                  width: 40,
-                  height: 40,
-                  background: "#003B73",
-                  borderRadius: "var(--radius-md)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#C9A227",
-                  fontWeight: 800,
-                  fontSize: "1.125rem",
-                }}
-              >
-                LIC
-              </div>
+              <LogoMark size={52} full />
               <div>
                 <div
                   style={{
-                    fontSize: "1.0625rem",
+                    fontSize: "1rem",
                     fontWeight: 700,
-                    color: "#003B73",
+                    color: "#004B87",
                     lineHeight: 1.2,
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  LIC Agent
+                  {site.agent_name}
                 </div>
                 <div
                   style={{
@@ -158,7 +171,7 @@ export function Header() {
                     fontWeight: 500,
                   }}
                 >
-                  Insurance Advisor
+                  LIC Agent
                 </div>
               </div>
             </Link>
@@ -168,7 +181,10 @@ export function Header() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.25rem",
+                gap: "0.5rem",
+                flex: "1 1 auto",
+                justifyContent: "center",
+                minWidth: 0,
               }}
               className="desktop-nav"
             >
@@ -176,16 +192,22 @@ export function Header() {
                 link.children ? (
                   <div
                     key={link.label}
+                    data-nav-dropdown
                     style={{ position: "relative" }}
                     onMouseEnter={() => setActiveDropdown(link.label)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
                     <button
+                      type="button"
+                      aria-haspopup="menu"
+                      aria-expanded={activeDropdown === link.label}
+                      onClick={() => setActiveDropdown(activeDropdown === link.label ? null : link.label)}
                       style={{
                         display: "flex",
                         alignItems: "center",
                         gap: "0.25rem",
-                        padding: "0.5rem 0.75rem",
+                        padding: "0.5rem 0.875rem",
+                        whiteSpace: "nowrap",
                         fontSize: "0.9375rem",
                         fontWeight: 500,
                         color: "var(--text-primary)",
@@ -201,17 +223,23 @@ export function Header() {
                     </button>
                     {activeDropdown === link.label && (
                       <div
+                        role="menu"
                         style={{
                           position: "absolute",
-                          top: "calc(100% + 4px)",
+                          top: "100%",
                           left: 0,
+                          paddingTop: "8px", /* invisible bridge so the menu stays open while the cursor travels down */
+                          zIndex: 100,
+                        }}
+                      >
+                      <div
+                        style={{
                           background: "#ffffff",
                           border: "1px solid var(--border)",
                           borderRadius: "var(--radius-lg)",
                           boxShadow: "var(--shadow-xl)",
-                          minWidth: "200px",
+                          minWidth: "220px",
                           padding: "0.5rem",
-                          zIndex: 100,
                         }}
                         className="animate-scale-in"
                       >
@@ -219,9 +247,11 @@ export function Header() {
                           <Link
                             key={child.href}
                             href={child.href}
+                            role="menuitem"
+                            onClick={() => setActiveDropdown(null)}
                             style={{
                               display: "block",
-                              padding: "0.625rem 0.875rem",
+                              padding: "0.75rem 1rem",
                               fontSize: "0.9rem",
                               color: "var(--text-secondary)",
                               borderRadius: "var(--radius-md)",
@@ -230,7 +260,7 @@ export function Header() {
                             }}
                             onMouseEnter={(e) => {
                               (e.target as HTMLElement).style.background = "var(--primary-50)";
-                              (e.target as HTMLElement).style.color = "#003B73";
+                              (e.target as HTMLElement).style.color = "#004B87";
                             }}
                             onMouseLeave={(e) => {
                               (e.target as HTMLElement).style.background = "none";
@@ -241,6 +271,7 @@ export function Header() {
                           </Link>
                         ))}
                       </div>
+                      </div>
                     )}
                   </div>
                 ) : (
@@ -248,7 +279,8 @@ export function Header() {
                     key={link.href}
                     href={link.href!}
                     style={{
-                      padding: "0.5rem 0.75rem",
+                      padding: "0.5rem 0.875rem",
+                      whiteSpace: "nowrap",
                       fontSize: "0.9375rem",
                       fontWeight: 500,
                       color: "var(--text-primary)",
@@ -268,20 +300,25 @@ export function Header() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.75rem",
+                gap: "0.625rem",
+                flexShrink: 0,
               }}
               className="desktop-nav"
             >
               <Link href="/chat" className="btn btn-secondary btn-sm">
                 <MessageCircle size={16} />
-                Chat with Advisor
+                Chat<span className="chat-long">&nbsp;with Advisor</span>
               </Link>
               {isAuthenticated ? (
-                <div style={{ position: "relative" }}
+                <div data-nav-dropdown style={{ position: "relative" }}
                   onMouseEnter={() => setActiveDropdown("user")}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <button
+                    type="button"
+                    aria-haspopup="menu"
+                    aria-expanded={activeDropdown === "user"}
+                    onClick={() => setActiveDropdown(activeDropdown === "user" ? null : "user")}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -292,7 +329,7 @@ export function Header() {
                       borderRadius: "var(--radius-md)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
-                      color: "#003B73",
+                      color: "#004B87",
                       cursor: "pointer",
                     }}
                   >
@@ -303,7 +340,7 @@ export function Header() {
                     <div
                       style={{
                         position: "absolute",
-                        top: "calc(100% + 4px)",
+                        top: "100%",
                         right: 0,
                         background: "#ffffff",
                         border: "1px solid var(--border)",
@@ -410,7 +447,7 @@ export function Header() {
           left: 0,
           bottom: 0,
           width: "300px",
-          background: "#003B73",
+          background: "#004B87",
           color: "#fff",
           zIndex: 50,
           transform: mobileOpen ? "translateX(0)" : "translateX(-100%)",
@@ -430,8 +467,8 @@ export function Header() {
             marginBottom: "1.5rem",
           }}
         >
-          <div style={{ fontWeight: 700, fontSize: "1.125rem", color: "#C9A227" }}>
-            LIC Agent
+          <div style={{ fontWeight: 700, fontSize: "1.125rem", color: "#FFCC00" }}>
+            {site.agent_name}
           </div>
           <button
             onClick={() => setMobileOpen(false)}
@@ -526,11 +563,14 @@ export function Header() {
       </div>
 
       <style jsx global>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1199px) {
           .desktop-nav { display: none !important; }
         }
-        @media (min-width: 901px) {
+        @media (min-width: 1200px) {
           .mobile-nav-btn { display: none !important; }
+        }
+        @media (max-width: 1499px) {
+          .chat-long { display: none; }
         }
       `}</style>
     </>

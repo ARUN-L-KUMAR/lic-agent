@@ -9,8 +9,8 @@ const categories = [
     name: "Protection",
     description: "Term plans to protect your family's financial future",
     href: "/plans?category=Protection",
-    color: "#003B73",
-    bg: "#e6edf5",
+    color: "#004B87",
+    bg: "#E8F3FB",
   },
   {
     icon: PiggyBank,
@@ -26,7 +26,7 @@ const categories = [
     description: "Secure your child's education and future goals",
     href: "/plans?category=Child Plans",
     color: "#0066B3",
-    bg: "#dbeafe",
+    bg: "#E8F3FB",
   },
   {
     icon: Wallet2,
@@ -41,8 +41,8 @@ const categories = [
     name: "Wealth / ULIP",
     description: "Market-linked insurance plans for wealth creation",
     href: "/plans?category=ULIP",
-    color: "#C9A227",
-    bg: "#fef9e7",
+    color: "#FFCC00",
+    bg: "#FFF8D6",
   },
   {
     icon: Heart,

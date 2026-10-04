@@ -79,7 +79,7 @@ export function PremiumCalculator() {
             gap: "0.5rem",
           }}
         >
-          <Calculator size={20} style={{ color: "#003B73" }} />
+          <Calculator size={20} style={{ color: "#004B87" }} />
           Calculate Premium
         </h2>
 
@@ -182,7 +182,7 @@ export function PremiumCalculator() {
 
             <div
               style={{
-                background: "#003B73",
+                background: "#004B87",
                 borderRadius: "var(--radius-lg)",
                 padding: "1.75rem",
                 marginBottom: "1.5rem",
@@ -196,7 +196,7 @@ export function PremiumCalculator() {
                 style={{
                   fontSize: "2.25rem",
                   fontWeight: 800,
-                  color: "#C9A227",
+                  color: "#FFCC00",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

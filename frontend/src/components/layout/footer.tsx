@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoMark } from "@/components/brand/logo";
 import Link from "next/link";
 import {
   Phone,
@@ -8,14 +9,17 @@ import {
   MessageCircle,
   Share2,
 } from "lucide-react";
+import { useSiteSettings, telHref } from "@/lib/use-site-settings";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const site = useSiteSettings();
+  const waNumber = (site.whatsapp || "").replace(/\D/g, "");
 
   return (
     <footer
       style={{
-        background: "#003B73",
+        background: "#004B87",
         color: "rgba(255,255,255,0.85)",
         paddingTop: "3.5rem",
       }}
@@ -39,28 +43,13 @@ export function Footer() {
                 marginBottom: "1rem",
               }}
             >
-              <div
-                style={{
-                  width: 44,
-                  height: 44,
-                  background: "#C9A227",
-                  borderRadius: "var(--radius-md)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  fontWeight: 800,
-                  fontSize: "1rem",
-                }}
-              >
-                LIC
-              </div>
+              <LogoMark size={44} variant="onDark" />
               <div>
                 <div style={{ fontSize: "1.125rem", fontWeight: 700, color: "#fff" }}>
-                  LIC Agent
+                  {site.agent_name}
                 </div>
                 <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)" }}>
-                  Insurance Advisor
+                  LIC Agent
                 </div>
               </div>
             </div>
@@ -111,7 +100,7 @@ export function Footer() {
           <div>
             <h4
               style={{
-                color: "#C9A227",
+                color: "#FFCC00",
                 fontSize: "0.8125rem",
                 fontWeight: 700,
                 letterSpacing: "0.08em",
@@ -147,7 +136,7 @@ export function Footer() {
           <div>
             <h4
               style={{
-                color: "#C9A227",
+                color: "#FFCC00",
                 fontSize: "0.8125rem",
                 fontWeight: 700,
                 letterSpacing: "0.08em",
@@ -183,7 +172,7 @@ export function Footer() {
           <div>
             <h4
               style={{
-                color: "#C9A227",
+                color: "#FFCC00",
                 fontSize: "0.8125rem",
                 fontWeight: 700,
                 letterSpacing: "0.08em",
@@ -195,11 +184,11 @@ export function Footer() {
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {[
-                { icon: Phone, text: "+91-98765-43210", href: "tel:+919876543210" },
-                { icon: MessageCircle, text: "WhatsApp", href: "https://wa.me/919876543210" },
-                { icon: Mail, text: "agent@licagent.com", href: "mailto:agent@licagent.com" },
-                { icon: MapPin, text: "Chennai, Tamil Nadu", href: "#" },
-              ].map(({ icon: Icon, text, href }) => (
+                !!site.phone && { icon: Phone, text: site.phone, href: telHref(site.phone) },
+                !!waNumber && { icon: MessageCircle, text: "WhatsApp", href: `https://wa.me/${waNumber}` },
+                !!site.email && { icon: Mail, text: site.email, href: `mailto:${site.email}` },
+                !!site.office_address && { icon: MapPin, text: site.service_locations || site.office_address || "", href: "#" },
+              ].filter((x): x is Exclude<typeof x, false> => x !== false).map(({ icon: Icon, text, href }) => (
                 <a
                   key={text}
                   href={href}
@@ -212,7 +201,7 @@ export function Footer() {
                     textDecoration: "none",
                   }}
                 >
-                  <Icon size={16} style={{ color: "#C9A227", flexShrink: 0 }} />
+                  <Icon size={16} style={{ color: "#FFCC00", flexShrink: 0 }} />
                   {text}
                 </a>
               ))}
@@ -246,11 +235,7 @@ export function Footer() {
             }}
           >
             <strong style={{ color: "rgba(255,255,255,0.7)" }}>Disclaimer:</strong>{" "}
-            This website is operated by an individual LIC agent for informational and
-            customer-service purposes. It is NOT the official LIC website. Policy
-            information is subject to official LIC policy documents, terms, conditions,
-            and applicable rules. Insurance is subject to market risks. Please read all
-            policy-related documents carefully.
+            {site.main_disclaimer} Please read all policy-related documents carefully.
           </p>
           <div
             style={{
@@ -262,7 +247,7 @@ export function Footer() {
             }}
           >
             <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)" }}>
-              © {currentYear} LIC Agent Platform. All rights reserved.
+              © {currentYear} {site.agent_name}, LIC Agent. All rights reserved.
             </p>
             <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
               {[

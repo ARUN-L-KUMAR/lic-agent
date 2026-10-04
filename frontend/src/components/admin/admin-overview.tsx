@@ -29,7 +29,7 @@ const METRIC_CARDS = (data: DashboardData) => [
     icon: Users,
     label: "Total Customers",
     value: data.total_customers.toLocaleString(),
-    color: "#003B73",
+    color: "#004B87",
     bg: "var(--primary-50)",
   },
   {
@@ -45,7 +45,7 @@ const METRIC_CARDS = (data: DashboardData) => [
     label: "Appointments Today",
     value: data.appointments_today.toString(),
     color: "#0066B3",
-    bg: "#dbeafe",
+    bg: "#E8F3FB",
   },
   {
     icon: MessageSquare,
@@ -65,7 +65,7 @@ const METRIC_CARDS = (data: DashboardData) => [
     icon: Shield,
     label: "Open Enquiries",
     value: data.open_enquiries.toString(),
-    color: "#D99A00",
+    color: "#D9A900",
     bg: "var(--warning-light)",
   },
 ];
@@ -193,7 +193,7 @@ export function AdminOverview() {
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Bar dataKey="count" fill="#003B73" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill="#004B87" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
@@ -235,7 +235,7 @@ export function AdminOverview() {
                     style={{
                       width: 24,
                       height: 24,
-                      background: i === 0 ? "#C9A227" : "var(--bg)",
+                      background: i === 0 ? "#FFCC00" : "var(--bg)",
                       borderRadius: "50%",
                       display: "flex",
                       alignItems: "center",

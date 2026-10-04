@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { MessageCircle, Phone, ChevronRight, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { HeroCover } from "@/components/home/hero-cover";
+import { useSiteSettings } from "@/lib/use-site-settings";
 
 export function HeroSection() {
+  const site = useSiteSettings();
   return (
     <section
       style={{
-        background: "#003B73",
+        background: "#004B87",
         color: "#ffffff",
         padding: "5rem 0",
         position: "relative",
@@ -41,6 +44,7 @@ export function HeroSection() {
 
       <div className="container-site" style={{ position: "relative" }}>
         <div
+          className="hero-text"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr",
@@ -62,7 +66,7 @@ export function HeroSection() {
                 padding: "0.375rem 0.875rem",
                 fontSize: "0.8125rem",
                 fontWeight: 600,
-                color: "#C9A227",
+                color: "#FFCC00",
                 marginBottom: "1.5rem",
               }}
             >
@@ -70,12 +74,12 @@ export function HeroSection() {
                 style={{
                   width: 7,
                   height: 7,
-                  background: "#C9A227",
+                  background: "#FFCC00",
                   borderRadius: "50%",
                   display: "inline-block",
                 }}
               />
-              Licensed LIC Insurance Agent — Chennai, Tamil Nadu
+              LIC Agent — {site.service_locations || site.office_address}
             </div>
 
             {/* Headline */}
@@ -90,7 +94,7 @@ export function HeroSection() {
               }}
             >
               Plan Today.{" "}
-              <span style={{ color: "#C9A227" }}>Protect</span>{" "}
+              <span style={{ color: "#FFCC00" }}>Protect</span>{" "}
               Tomorrow.
             </h1>
 
@@ -135,7 +139,7 @@ export function HeroSection() {
                     color: "rgba(255,255,255,0.7)",
                   }}
                 >
-                  <ChevronRight size={14} style={{ color: "#C9A227" }} />
+                  <ChevronRight size={14} style={{ color: "#FFCC00" }} />
                   {tag}
                 </div>
               ))}
@@ -182,16 +186,16 @@ export function HeroSection() {
               }}
             >
               {[
-                { label: "LIC Agent", value: "Licensed" },
-                { label: "Experience", value: "10+ Years" },
-                { label: "Clients Served", value: "500+" },
-              ].map(({ label, value }) => (
+                { label: "LIC Agent", value: site.agent_name },
+                site.years_experience && { label: "Experience", value: `${site.years_experience} Years` },
+                site.customers_served && { label: "Clients Served", value: site.customers_served },
+              ].filter((x): x is { label: string; value: string } => Boolean(x)).map(({ label, value }) => (
                 <div key={label}>
                   <div
                     style={{
                       fontSize: "1.375rem",
                       fontWeight: 800,
-                      color: "#C9A227",
+                      color: "#FFCC00",
                       lineHeight: 1,
                     }}
                   >
@@ -212,6 +216,7 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+      <HeroCover />
     </section>
   );
 }

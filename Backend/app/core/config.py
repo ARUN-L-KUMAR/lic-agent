@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
     APP_DEBUG: bool = True
     APP_HOST: str = "0.0.0.0"
-    APP_PORT: int = 8000
+    APP_PORT: int = 5001
     SECRET_KEY: str = "change_this_secret_key_in_production"
 
     # ── Database ─────────────────────────────────────────
@@ -40,8 +40,8 @@ class Settings(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # ── CORS ──────────────────────────────────────────────
-    CORS_ORIGINS: Union[List[str], str] = ["http://localhost:3000"]
-    FRONTEND_URL: str = "http://localhost:3000"
+    CORS_ORIGINS: Union[List[str], str] = ["http://localhost:5000"]
+    FRONTEND_URL: str = "http://localhost:5000"
 
     @field_validator("CORS_ORIGINS", mode="after")
     @classmethod
@@ -93,10 +93,10 @@ class Settings(BaseSettings):
     ADMIN_FIRST_NAME: str = "Platform"
     ADMIN_LAST_NAME: str = "Admin"
 
-    AGENT_EMAIL: str = "agent@licagent.com"
+    AGENT_EMAIL: str = "laxamans1980@gmail.com"
     AGENT_PASSWORD: str = "Agent@123456"
-    AGENT_FIRST_NAME: str = "LIC"
-    AGENT_LAST_NAME: str = "Agent"
+    AGENT_FIRST_NAME: str = "LAKSHMI NARAYANAN"
+    AGENT_LAST_NAME: str = "S"
 
     # ── Pagination ────────────────────────────────────────
     DEFAULT_PAGE_SIZE: int = 20

@@ -20,8 +20,8 @@ function StarRating({ rating }: { rating: number }) {
         <Star
           key={i}
           size={14}
-          fill={i < rating ? "#C9A227" : "none"}
-          stroke={i < rating ? "#C9A227" : "#CBD5E1"}
+          fill={i < rating ? "#FFCC00" : "none"}
+          stroke={i < rating ? "#FFCC00" : "#D9E2EC"}
         />
       ))}
     </div>
@@ -118,8 +118,8 @@ export function TestimonialsSection() {
                       width: 40,
                       height: 40,
                       borderRadius: "50%",
-                      background: "#003B73",
-                      color: "#C9A227",
+                      background: "#004B87",
+                      color: "#FFCC00",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

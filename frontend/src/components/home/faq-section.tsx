@@ -10,7 +10,7 @@ const DEFAULT_FAQS = [
     id: "1",
     question: "What is this website? Is this the official LIC website?",
     answer:
-      "This website is operated by an individual LIC agent for informational and customer-service purposes. It is NOT the official LIC website. The official LIC website is www.licindia.in. Policy information here is for general understanding only.",
+      "This website is operated by an LIC agent for informational and customer-service purposes. It is not the official LIC website. The official LIC website is www.licindia.in. Policy information here is for general understanding only.",
   },
   {
     id: "2",
@@ -112,7 +112,7 @@ export function FaqSection() {
                   {faq.question}
                 </span>
                 {openId === faq.id ? (
-                  <ChevronUp size={18} style={{ color: "#003B73", flexShrink: 0 }} />
+                  <ChevronUp size={18} style={{ color: "#004B87", flexShrink: 0 }} />
                 ) : (
                   <ChevronDown size={18} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
                 )}

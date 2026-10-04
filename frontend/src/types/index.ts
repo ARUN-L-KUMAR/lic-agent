@@ -239,6 +239,7 @@ export interface SiteSettings {
   working_hours?: string;
   logo_url?: string;
   profile_image_url?: string;
+  hero_image_url?: string;
   social_links?: Record<string, string>;
   main_disclaimer?: string;
   insurance_disclaimer?: string;

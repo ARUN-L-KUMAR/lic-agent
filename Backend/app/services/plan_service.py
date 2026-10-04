@@ -41,13 +41,17 @@ class PlanService:
                 pass
 
         if category:
-            # Match either enum value or category slug
-            query = query.where(
-                or_(
-                    Plan.category == category,
-                    Plan.category.cast(PlanCategoryEnum) == category,
-                )
+            # Match the category enum (by value or name, e.g. "Child Plans" / "CHILD_PLANS")
+            # or the slug of the linked category record.
+            key = category.strip().lower().replace("-", " ").replace("_", " ")
+            member = next(
+                (m for m in PlanCategoryEnum if key in (m.value.lower(), m.name.lower().replace("_", " "))),
+                None,
             )
+            conditions = [Plan.category_ref.has(PlanCategory.slug == category.strip().lower())]
+            if member is not None:
+                conditions.append(Plan.category == member)
+            query = query.where(or_(*conditions))
 
         if search:
             search_term = f"%{search}%"

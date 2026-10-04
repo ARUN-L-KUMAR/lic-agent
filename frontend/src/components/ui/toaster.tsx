@@ -51,8 +51,8 @@ export function Toaster() {
   const colors = {
     success: { bg: "#d1fae5", color: "#198754", border: "#6ee7b7" },
     error: { bg: "#fee2e2", color: "#D92D20", border: "#fca5a5" },
-    info: { bg: "#dbeafe", color: "#0066B3", border: "#93c5fd" },
-    warning: { bg: "#fef3c7", color: "#D99A00", border: "#fcd34d" },
+    info: { bg: "#E8F3FB", color: "#0066B3", border: "#93c5fd" },
+    warning: { bg: "#fef3c7", color: "#D9A900", border: "#fcd34d" },
   };
 
   return (

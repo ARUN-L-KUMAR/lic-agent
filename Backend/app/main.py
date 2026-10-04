@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import text
 
 from app.api.v1.router import api_router
 from app.core.config import settings
@@ -45,6 +46,8 @@ async def lifespan(app: FastAPI):
     try:
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
+            # create_all never alters existing tables; add columns introduced after first setup.
+            await conn.execute(text("ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS hero_image_url VARCHAR(1024)"))
     except Exception as e:
         logger.warning("Could not auto-create database tables on startup", error=str(e))
 

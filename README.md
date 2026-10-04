@@ -2,7 +2,7 @@
 
 A production-ready, full-stack LIC insurance agent business platform built with Next.js 15, FastAPI, PostgreSQL, Redis, and Socket.IO.
 
-> **Disclaimer**: This platform is operated by an individual LIC agent for informational and customer-service purposes. It is not the official LIC website. Policy information is subject to official LIC policy documents, terms, conditions, and applicable rules.
+> **Disclaimer**: This platform is operated by an LIC agent for informational and customer-service purposes. It is not the official LIC website. Policy information is subject to official LIC policy documents, terms, conditions, and applicable rules.
 
 ---
 
@@ -159,10 +159,10 @@ docker-compose exec api python -m app.scripts.seed
 
 | Service | URL |
 |---------|-----|
-| Frontend | http://localhost:3000 |
-| API | http://localhost:8000 |
-| API Docs | http://localhost:8000/docs |
-| ReDoc | http://localhost:8000/redoc |
+| Frontend | http://localhost:5000 |
+| API | http://localhost:5001 |
+| API Docs | http://localhost:5001/docs |
+| ReDoc | http://localhost:5001/redoc |
 
 ---
 
@@ -183,7 +183,7 @@ cd apps/api
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 5001
 ```
 
 ### Database Migrations
@@ -205,8 +205,7 @@ alembic downgrade -1
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@licagent.com | Admin@123456 |
-| Agent | agent@licagent.com | Agent@123456 |
-| Customer | customer@demo.com | Customer@123456 |
+| Agent | laxamans1980@gmail.com | Agent@123456 |
 
 > **Change all credentials before production deployment.**
 

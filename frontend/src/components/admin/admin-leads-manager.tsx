@@ -113,8 +113,8 @@ export function AdminLeadsManager() {
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 cursor: "pointer",
-                background: statusFilter === s ? "#003B73" : "var(--surface)",
-                borderColor: statusFilter === s ? "#003B73" : "var(--border)",
+                background: statusFilter === s ? "#004B87" : "var(--surface)",
+                borderColor: statusFilter === s ? "#004B87" : "var(--border)",
                 color: statusFilter === s ? "#fff" : "var(--text-secondary)",
               }}
             >
@@ -301,7 +301,7 @@ export function AdminLeadsManager() {
                     fontSize: "0.8125rem",
                     cursor: "pointer",
                     fontWeight: 500,
-                    background: selectedLead.status === status ? "#003B73" : "var(--surface)",
+                    background: selectedLead.status === status ? "#004B87" : "var(--surface)",
                     color: selectedLead.status === status ? "#fff" : "var(--text-secondary)",
                   }}
                 >

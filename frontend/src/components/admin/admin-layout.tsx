@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoMark } from "@/components/brand/logo";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -74,22 +75,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                 gap: "0.75rem",
               }}
             >
-              <div
-                style={{
-                  width: 38,
-                  height: 38,
-                  background: "#C9A227",
-                  borderRadius: "var(--radius-md)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  fontWeight: 800,
-                  fontSize: "0.9rem",
-                }}
-              >
-                LIC
-              </div>
+              <LogoMark size={38} variant="onDark" />
               <div>
                 <div style={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem", lineHeight: 1.2 }}>
                   LIC Agent
@@ -147,8 +133,8 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                 width: 34,
                 height: 34,
                 borderRadius: "50%",
-                background: "#C9A227",
-                color: "#fff",
+                background: "#FFCC00",
+                color: "#172033",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoMark } from "@/components/brand/logo";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -123,23 +124,8 @@ export default function RegisterPage() {
             marginBottom: "2rem",
           }}
         >
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              background: "#003B73",
-              borderRadius: "var(--radius-md)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#C9A227",
-              fontWeight: 800,
-              fontSize: "1rem",
-            }}
-          >
-            LIC
-          </div>
-          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#003B73" }}>
+          <LogoMark size={44} />
+          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#004B87" }}>
             Create Account
           </span>
         </Link>
@@ -235,7 +221,7 @@ export default function RegisterPage() {
 
           <div style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
             Already have an account?{" "}
-            <Link href="/login" style={{ color: "#003B73", fontWeight: 600, textDecoration: "none" }}>
+            <Link href="/login" style={{ color: "#004B87", fontWeight: 600, textDecoration: "none" }}>
               Sign In
             </Link>
           </div>

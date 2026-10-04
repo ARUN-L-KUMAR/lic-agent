@@ -9,7 +9,7 @@ const calculators = [
     title: "Premium Calculator",
     description: "Estimate your insurance premium based on age, sum assured, and policy term.",
     href: "/calculators/premium",
-    color: "#003B73",
+    color: "#004B87",
   },
   {
     icon: TrendingUp,
@@ -38,7 +38,7 @@ export function CalculatorSection() {
   return (
     <section
       className="section"
-      style={{ background: "#003B73" }}
+      style={{ background: "#004B87" }}
     >
       <div className="container-site">
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
@@ -49,7 +49,7 @@ export function CalculatorSection() {
               fontWeight: 700,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              color: "#C9A227",
+              color: "#FFCC00",
               marginBottom: "0.75rem",
             }}
           >
@@ -111,7 +111,7 @@ export function CalculatorSection() {
                     width: 48,
                     height: 48,
                     borderRadius: "var(--radius-md)",
-                    background: "#C9A227",
+                    background: "#FFCC00",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -155,7 +155,7 @@ export function CalculatorSection() {
             textAlign: "center",
           }}
         >
-          ⚠️ <strong style={{ color: "#C9A227" }}>Disclaimer:</strong>{" "}
+          ⚠️ <strong style={{ color: "#FFCC00" }}>Disclaimer:</strong>{" "}
           All calculator results are illustrative estimates only. Actual policy values depend on specific
           policy terms, underwriting, and official LIC documentation. Consult the agent for accurate information.
         </div>

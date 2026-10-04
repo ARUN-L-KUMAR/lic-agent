@@ -15,7 +15,7 @@ export function CtaSection() {
       <div className="container-site">
         <div
           style={{
-            background: "#003B73",
+            background: "#004B87",
             borderRadius: "var(--radius-xl)",
             padding: "3.5rem 2rem",
             textAlign: "center",

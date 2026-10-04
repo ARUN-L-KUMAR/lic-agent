@@ -16,7 +16,7 @@ export default function PlansPage() {
       <main>
         <section
           style={{
-            background: "#003B73",
+            background: "#004B87",
             padding: "3rem 0 2rem",
             color: "#fff",
           }}

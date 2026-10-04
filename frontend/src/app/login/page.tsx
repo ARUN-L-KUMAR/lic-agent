@@ -1,5 +1,6 @@
 "use client";
 
+import { LogoMark } from "@/components/brand/logo";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -78,23 +79,8 @@ export default function LoginPage() {
             marginBottom: "2rem",
           }}
         >
-          <div
-            style={{
-              width: 44,
-              height: 44,
-              background: "#003B73",
-              borderRadius: "var(--radius-md)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#C9A227",
-              fontWeight: 800,
-              fontSize: "1rem",
-            }}
-          >
-            LIC
-          </div>
-          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#003B73" }}>
+          <LogoMark size={44} />
+          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#004B87" }}>
             LIC Agent Platform
           </span>
         </Link>
@@ -172,7 +158,7 @@ export default function LoginPage() {
                     href="/forgot-password"
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#003B73",
+                      color: "#004B87",
                       textDecoration: "none",
                       fontWeight: 500,
                     }}
@@ -236,7 +222,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              style={{ color: "#003B73", fontWeight: 600, textDecoration: "none" }}
+              style={{ color: "#004B87", fontWeight: 600, textDecoration: "none" }}
             >
               Register
             </Link>
@@ -258,7 +244,7 @@ export default function LoginPage() {
         >
           <Shield size={12} style={{ marginTop: "2px", flexShrink: 0, color: "var(--text-muted)" }} />
           Your information is protected. This platform uses encrypted, secure connections.
-          This is NOT the official LIC website.
+          This is not the official LIC website.
         </div>
       </div>
     </div>

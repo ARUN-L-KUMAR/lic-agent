@@ -8,8 +8,10 @@ import {
   FileText, ArrowLeft, Phone, BookOpen,
 } from "lucide-react";
 import type { Plan } from "@/types";
+import { useSiteSettings, telHref } from "@/lib/use-site-settings";
 
 export function PlanDetail({ slug }: { slug: string }) {
+  const site = useSiteSettings();
   const { data: plan, isLoading, error } = useQuery({
     queryKey: ["plan", slug],
     queryFn: () => plansService.getBySlug(slug),
@@ -44,7 +46,7 @@ export function PlanDetail({ slug }: { slug: string }) {
   return (
     <div>
       {/* Hero */}
-      <div style={{ background: "#003B73", padding: "2.5rem 0", color: "#fff" }}>
+      <div style={{ background: "#004B87", padding: "2.5rem 0", color: "#fff" }}>
         <div className="container-site">
           <Link
             href="/plans"
@@ -112,7 +114,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {/* Key eligibility */}
             <div className="card" style={{ padding: "1.75rem" }}>
               <h2 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Calendar size={18} style={{ color: "#003B73" }} />
+                <Calendar size={18} style={{ color: "#004B87" }} />
                 Eligibility Overview
               </h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "1rem" }}>
@@ -173,7 +175,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {plan.documents_required && plan.documents_required.length > 0 && (
               <div className="card" style={{ padding: "1.75rem" }}>
                 <h2 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "1.25rem", display: "flex", gap: "0.5rem" }}>
-                  <FileText size={18} style={{ color: "#003B73" }} /> Documents Required
+                  <FileText size={18} style={{ color: "#004B87" }} /> Documents Required
                 </h2>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {plan.documents_required.map((doc, i) => (
@@ -215,7 +217,7 @@ export function PlanDetail({ slug }: { slug: string }) {
 
           {/* Sidebar */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", position: "sticky", top: "80px" }}>
-            <div className="card" style={{ padding: "1.75rem", borderTop: "4px solid #003B73" }}>
+            <div className="card" style={{ padding: "1.75rem", borderTop: "4px solid #004B87" }}>
               <h3 style={{ fontWeight: 700, marginBottom: "1rem" }}>Enquire About This Plan</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
                 Get accurate details, premium quotes, and personalized advice from the agent.
@@ -224,7 +226,7 @@ export function PlanDetail({ slug }: { slug: string }) {
                 <Link href="/chat" className="btn btn-primary" style={{ justifyContent: "center" }}>
                   Chat with Agent
                 </Link>
-                <a href="tel:+919876543210" className="btn btn-secondary" style={{ justifyContent: "center" }}>
+                <a href={telHref(site.phone)} className="btn btn-secondary" style={{ justifyContent: "center" }}>
                   <Phone size={16} /> Call Agent
                 </a>
                 <Link href="/calculators/premium" className="btn btn-ghost" style={{ justifyContent: "center" }}>
@@ -236,7 +238,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {plan.faq && plan.faq.length > 0 && (
               <div className="card" style={{ padding: "1.5rem" }}>
                 <h4 style={{ fontWeight: 700, marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
-                  <BookOpen size={16} style={{ color: "#003B73" }} /> FAQs
+                  <BookOpen size={16} style={{ color: "#004B87" }} /> FAQs
                 </h4>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                   {(plan.faq as any[]).slice(0, 3).map((item: any, i: number) => (

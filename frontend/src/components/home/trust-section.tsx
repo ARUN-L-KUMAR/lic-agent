@@ -1,34 +1,20 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { Users, Award, BarChart2, MapPin } from "lucide-react";
-import apiClient from "@/lib/api-client";
-
-const DEFAULT_STATS = [
-  { icon: Award, label: "Years of Experience", value: "10+", color: "#C9A227" },
-  { icon: Users, label: "Clients Served", value: "500+", color: "#0066B3" },
-  { icon: BarChart2, label: "Plans Supported", value: "30+", color: "#198754" },
-  { icon: MapPin, label: "Service Locations", value: "Chennai & Nearby", color: "#003B73" },
-];
+import { useSiteSettings } from "@/lib/use-site-settings";
 
 export function TrustSection() {
-  const { data: settings } = useQuery({
-    queryKey: ["site-settings"],
-    queryFn: async () => {
-      const { data } = await apiClient.get("/site/settings");
-      return data;
-    },
-    staleTime: 10 * 60 * 1000,
-  });
+  const settings = useSiteSettings();
 
-  const stats = settings
-    ? [
-        { icon: Award, label: "Years of Experience", value: settings.years_experience || "10+", color: "#C9A227" },
-        { icon: Users, label: "Clients Served", value: settings.customers_served || "500+", color: "#0066B3" },
-        { icon: BarChart2, label: "Plans Supported", value: settings.plans_supported || "30+", color: "#198754" },
-        { icon: MapPin, label: "Service Locations", value: settings.service_locations || "Chennai & Nearby", color: "#003B73" },
-      ]
-    : DEFAULT_STATS;
+  // Only verified values stored in the database are shown; nothing is invented.
+  const stats = [
+    !!settings.years_experience && { icon: Award, label: "Years of Experience", value: settings.years_experience, color: "#FFCC00" },
+    !!settings.customers_served && { icon: Users, label: "Clients Served", value: settings.customers_served, color: "#0066B3" },
+    !!settings.plans_supported && { icon: BarChart2, label: "Plans Supported", value: settings.plans_supported, color: "#198754" },
+    !!settings.service_locations && { icon: MapPin, label: "Service Locations", value: settings.service_locations, color: "#004B87" },
+  ].filter((x): x is Exclude<typeof x, false> => x !== false);
+
+  if (stats.length === 0) return null;
 
   return (
     <section

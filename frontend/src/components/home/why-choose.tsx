@@ -1,13 +1,15 @@
 "use client";
 
 import { CheckCircle, HeadphonesIcon, FileSearch, Clock, Award } from "lucide-react";
+import { AgentPhoto } from "@/components/agent/agent-photo";
+import { useSiteSettings, telHref } from "@/lib/use-site-settings";
 
 const reasons = [
   {
     icon: Award,
-    title: "Licensed & Experienced",
+    title: "Personal LIC Agent Service",
     description:
-      "A licensed LIC agent with over 10 years of experience helping families make informed insurance decisions.",
+      "An LIC agent helping families understand LIC plans and make informed insurance decisions.",
   },
   {
     icon: FileSearch,
@@ -36,6 +38,7 @@ const reasons = [
 ];
 
 export function WhyChooseSection() {
+  const site = useSiteSettings();
   return (
     <section className="section" style={{ background: "var(--bg)" }}>
       <div className="container-site">
@@ -91,7 +94,7 @@ export function WhyChooseSection() {
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={20} style={{ color: "#003B73" }} />
+                    <Icon size={20} style={{ color: "#004B87" }} />
                   </div>
                   <div>
                     <h4
@@ -125,25 +128,11 @@ export function WhyChooseSection() {
               className="card"
               style={{
                 padding: "2rem",
-                borderTop: "4px solid #003B73",
+                borderTop: "4px solid #004B87",
               }}
             >
-              <div
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: "50%",
-                  background: "#003B73",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#C9A227",
-                  fontSize: "2rem",
-                  fontWeight: 800,
-                  marginBottom: "1.25rem",
-                }}
-              >
-                LIC
+              <div style={{ marginBottom: "1.25rem" }}>
+                <AgentPhoto width={96} height={96} />
               </div>
               <h3
                 style={{
@@ -153,10 +142,10 @@ export function WhyChooseSection() {
                   marginBottom: "0.375rem",
                 }}
               >
-                LIC Agent
+                {site.agent_name}
               </h3>
               <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginBottom: "1rem" }}>
-                Licensed LIC Agent | Code: LIC-AGENT-001
+                LIC Agent{site.agent_code ? ` | Agent Code: ${site.agent_code}` : ""}
               </p>
               <p
                 style={{
@@ -166,12 +155,10 @@ export function WhyChooseSection() {
                   marginBottom: "1.5rem",
                 }}
               >
-                I am a certified LIC agent with over 10 years of experience helping
-                families across Tamil Nadu secure their financial future through the
-                right insurance plans.
+                {site.about_text}
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                <a href="tel:+919876543210" className="btn btn-primary" style={{ justifyContent: "center" }}>
+                <a href={telHref(site.phone)} className="btn btn-primary" style={{ justifyContent: "center" }}>
                   Call Now
                 </a>
                 <a href="/book-appointment" className="btn btn-secondary" style={{ justifyContent: "center", textDecoration: "none", display: "flex", alignItems: "center" }}>

@@ -16,6 +16,9 @@ from app.core.config import settings
 _request_times: dict[str, list[float]] = defaultdict(list)
 
 RATE_LIMIT_WINDOW = 60  # seconds
+REDIS_RETRY_AFTER = 30  # seconds to use the in-memory fallback after a Redis failure
+
+_redis_down_until = 0.0
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
@@ -31,10 +34,15 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         else:
             limit = settings.RATE_LIMIT_PER_MINUTE
 
-        try:
-            allowed = await self._check_rate_limit_redis(client_ip, path, limit)
-        except Exception:
+        global _redis_down_until
+        if time.time() < _redis_down_until:
             allowed = self._check_rate_limit_memory(client_ip, limit)
+        else:
+            try:
+                allowed = await self._check_rate_limit_redis(client_ip, path, limit)
+            except Exception:
+                _redis_down_until = time.time() + REDIS_RETRY_AFTER
+                allowed = self._check_rate_limit_memory(client_ip, limit)
 
         if not allowed:
             return JSONResponse(

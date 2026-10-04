@@ -46,6 +46,7 @@ class SiteSettings(Base):
     # Media
     logo_url: Mapped[Optional[str]] = mapped_column(String(1024), nullable=True)
     profile_image_url: Mapped[Optional[str]] = mapped_column(String(1024), nullable=True)
+    hero_image_url: Mapped[Optional[str]] = mapped_column(String(1024), nullable=True)
     
     # Social links
     social_links: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)

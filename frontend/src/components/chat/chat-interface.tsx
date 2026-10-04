@@ -6,6 +6,7 @@ import { Send, Bot, User, Phone, Info, RefreshCw } from "lucide-react";
 import apiClient from "@/lib/api-client";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
+import { useSiteSettings, telHref } from "@/lib/use-site-settings";
 
 const AI_DISCLAIMER =
   "AI-generated information is for general informational purposes only. Please consult the LIC agent and official policy documents before making decisions.";
@@ -28,6 +29,7 @@ const WELCOME_MESSAGE: Message = {
 };
 
 export function ChatInterface() {
+  const site = useSiteSettings();
   const [mode, setMode] = useState<"ai" | "agent">("ai");
   const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
@@ -130,7 +132,7 @@ export function ChatInterface() {
         {/* Header */}
         <div
           style={{
-            background: "#003B73",
+            background: "#004B87",
             padding: "1rem 1.25rem",
             display: "flex",
             alignItems: "center",
@@ -148,7 +150,7 @@ export function ChatInterface() {
                 cursor: "pointer",
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                background: mode === "ai" ? "#C9A227" : "rgba(255,255,255,0.1)",
+                background: mode === "ai" ? "#FFCC00" : "rgba(255,255,255,0.1)",
                 color: "#fff",
                 display: "flex",
                 alignItems: "center",
@@ -167,7 +169,7 @@ export function ChatInterface() {
                 cursor: "pointer",
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                background: mode === "agent" ? "#C9A227" : "rgba(255,255,255,0.1)",
+                background: mode === "agent" ? "#FFCC00" : "rgba(255,255,255,0.1)",
                 color: "#fff",
                 display: "flex",
                 alignItems: "center",
@@ -230,25 +232,25 @@ export function ChatInterface() {
               style={{
                 width: 72,
                 height: 72,
-                background: "#003B73",
+                background: "#004B87",
                 borderRadius: "50%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#C9A227",
+                color: "#FFCC00",
               }}
             >
               <User size={36} />
             </div>
             <div>
-              <h3 style={{ fontWeight: 700, marginBottom: "0.5rem" }}>Connect with LIC Agent</h3>
+              <h3 style={{ fontWeight: 700, marginBottom: "0.5rem" }}>Connect with {site.agent_name}</h3>
               <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
-                Connect with a licensed LIC agent for personalized assistance.
+                Connect with your LIC agent for personalized assistance.
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", width: "100%", maxWidth: "260px" }}>
               <a
-                href="tel:+919876543210"
+                href={telHref(site.phone)}
                 className="btn btn-primary"
                 style={{ justifyContent: "center" }}
               >
@@ -294,7 +296,7 @@ export function ChatInterface() {
                         color: "var(--text-muted)",
                       }}
                     >
-                      <Bot size={13} style={{ color: "#003B73" }} />
+                      <Bot size={13} style={{ color: "#004B87" }} />
                       AI Assistant
                     </div>
                   )}
@@ -341,7 +343,7 @@ export function ChatInterface() {
                             background: "var(--surface)",
                             border: "1px solid var(--primary-200)",
                             borderRadius: "100px",
-                            color: "#003B73",
+                            color: "#004B87",
                             cursor: "pointer",
                             fontWeight: 500,
                           }}
@@ -433,15 +435,15 @@ export function ChatInterface() {
           </div>
         </div>
 
-        <div className="card" style={{ padding: "1.25rem", background: "#003B73" }}>
-          <h4 style={{ fontSize: "0.875rem", fontWeight: 700, marginBottom: "0.75rem", color: "#C9A227" }}>
+        <div className="card" style={{ padding: "1.25rem", background: "#004B87" }}>
+          <h4 style={{ fontSize: "0.875rem", fontWeight: 700, marginBottom: "0.75rem", color: "#FFCC00" }}>
             Need Expert Advice?
           </h4>
           <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.7)", marginBottom: "1rem", lineHeight: 1.6 }}>
             The AI provides general information. For personalized advice and accurate premiums, consult the agent.
           </p>
           <a
-            href="tel:+919876543210"
+            href={telHref(site.phone)}
             className="btn btn-gold btn-sm"
             style={{ display: "flex", justifyContent: "center", textDecoration: "none" }}
           >
