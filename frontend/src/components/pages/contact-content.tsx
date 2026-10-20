@@ -45,7 +45,7 @@ export function ContactContent() {
         <p style={{ color: "var(--text-muted)", marginTop: "-0.75rem" }}>LIC Agent</p>
         {items.map(({ icon: Icon, label, text, href }) => (
           <div key={label} style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-            <Icon size={18} style={{ color: "#004B87", flexShrink: 0 }} />
+            <Icon size={18} style={{ color: "var(--cyan)", flexShrink: 0 }} />
             {href ? (
               <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{text}</a>
             ) : (

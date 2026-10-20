@@ -5,75 +5,49 @@ import { MessageCircle, Phone } from "lucide-react";
 
 export function CtaSection() {
   return (
-    <section
-      style={{
-        background: "var(--surface)",
-        borderTop: "1px solid var(--border)",
-        padding: "5rem 0",
-      }}
-    >
+    <section style={{ padding: "4rem 0 5rem" }}>
       <div className="container-site">
         <div
-          style={{
-            background: "#004B87",
-            borderRadius: "var(--radius-xl)",
-            padding: "3.5rem 2rem",
-            textAlign: "center",
-          }}
+          className="glow-border"
+          style={{ padding: "4rem 2rem", textAlign: "center", position: "relative", overflow: "hidden" }}
         >
-          <h2
-            style={{
-              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-              fontWeight: 800,
-              color: "#ffffff",
-              marginBottom: "1rem",
-            }}
-          >
-            Need help choosing a plan?
-          </h2>
-          <p
-            style={{
-              fontSize: "1.0625rem",
-              color: "rgba(255,255,255,0.7)",
-              maxWidth: "520px",
-              margin: "0 auto 2.5rem",
-              lineHeight: 1.7,
-            }}
-          >
-            Talk to a licensed LIC advisor for personalized guidance on choosing
-            the right insurance plan for your family&apos;s needs.
-          </p>
+          {/* inner aurora */}
           <div
+            aria-hidden="true"
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              justifyContent: "center",
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              background:
+                "radial-gradient(600px 260px at 50% 0%, rgba(59,176,255,0.28), transparent 70%), radial-gradient(500px 240px at 90% 100%, rgba(255,204,0,0.14), transparent 70%)",
             }}
-          >
-            <Link href="/chat" className="btn btn-gold btn-lg">
-              <MessageCircle size={20} />
-              Chat with Advisor
-            </Link>
-            <Link
-              href="/book-appointment"
+          />
+          <div style={{ position: "relative" }}>
+            <h2 style={{ fontSize: "clamp(1.9rem, 3.4vw, 2.75rem)", fontWeight: 700, marginBottom: "1rem" }}>
+              Need help <span className="text-gradient">choosing a plan?</span>
+            </h2>
+            <p
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.875rem 1.75rem",
-                fontSize: "1rem",
-                fontWeight: 600,
-                color: "#fff",
-                border: "2px solid rgba(255,255,255,0.3)",
-                borderRadius: "var(--radius-md)",
-                textDecoration: "none",
-                transition: "all 0.2s ease",
+                fontSize: "1.0625rem",
+                color: "var(--text-secondary)",
+                maxWidth: "540px",
+                margin: "0 auto 2.5rem",
+                lineHeight: 1.7,
               }}
             >
-              <Phone size={18} />
-              Request Callback
-            </Link>
+              Talk to a licensed LIC advisor for personalized guidance on choosing the right insurance plan for your
+              family&apos;s needs.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "center" }}>
+              <Link href="/chat" className="btn btn-gold btn-lg">
+                <MessageCircle size={20} />
+                Chat with Advisor
+              </Link>
+              <Link href="/book-appointment" className="btn btn-secondary btn-lg">
+                <Phone size={18} />
+                Request Callback
+              </Link>
+            </div>
           </div>
         </div>
       </div>

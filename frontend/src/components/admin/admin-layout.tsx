@@ -54,7 +54,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "var(--bg)" }}>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
       <aside className="admin-sidebar">
         {/* Logo */}
@@ -75,7 +75,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                 gap: "0.75rem",
               }}
             >
-              <LogoMark size={38} variant="onDark" />
+              <LogoMark size={30} variant="onDark" />
               <div>
                 <div style={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem", lineHeight: 1.2 }}>
                   LIC Agent
@@ -133,8 +133,8 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                 width: 34,
                 height: 34,
                 borderRadius: "50%",
-                background: "#FFCC00",
-                color: "#172033",
+                background: "linear-gradient(135deg, #FFDD33, #FFB800)",
+                color: "#1A1300",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -188,7 +188,8 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         {/* Topbar */}
         <header
           style={{
-            background: "var(--surface)",
+            background: "rgba(7, 11, 24, 0.7)",
+            backdropFilter: "blur(18px) saturate(160%)",
             borderBottom: "1px solid var(--border)",
             padding: "0 1.5rem",
             height: "64px",
@@ -241,7 +242,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                   height: "8px",
                   background: "var(--danger)",
                   borderRadius: "50%",
-                  border: "2px solid var(--surface)",
+                  border: "2px solid var(--surface-solid)",
                 }}
               />
             </button>

@@ -8,25 +8,27 @@ import type { Plan } from "@/types";
 
 function PlanCard({ plan }: { plan: Plan }) {
   const categoryColors: Record<string, string> = {
-    Protection: "#004B87",
-    Savings: "#198754",
-    Endowment: "#0066B3",
-    "Money Back": "#7c3aed",
-    "Whole Life": "#0066B3",
-    Pension: "#7c3aed",
-    "Child Plans": "#0066B3",
+    Protection: "#3BB0FF",
+    Savings: "#34D399",
+    Endowment: "#22E4FF",
+    "Money Back": "#A78BFA",
+    "Whole Life": "#22E4FF",
+    Pension: "#A78BFA",
+    "Child Plans": "#22E4FF",
     ULIP: "#FFCC00",
-    Health: "#D92D20",
-    "Micro Insurance": "#667085",
+    Health: "#FB7185",
+    "Micro Insurance": "#94A3B8",
   };
-  const color = categoryColors[plan.category] || "#004B87";
+  const color = categoryColors[plan.category] || "#3BB0FF";
 
   return (
     <div className="plan-card">
       {/* Category bar */}
       <div
         style={{
-          background: color,
+          background: `linear-gradient(90deg, ${color}2E, ${color}08)`,
+          borderTop: `2px solid ${color}`,
+          boxShadow: `0 -6px 24px -8px ${color}`,
           padding: "0.875rem 1.25rem",
           display: "flex",
           alignItems: "center",
@@ -37,25 +39,19 @@ function PlanCard({ plan }: { plan: Plan }) {
           style={{
             fontSize: "0.75rem",
             fontWeight: 700,
-            color: "rgba(255,255,255,0.8)",
+            color,
             textTransform: "uppercase",
-            letterSpacing: "0.06em",
+            letterSpacing: "0.12em",
           }}
         >
           {plan.category}
         </span>
-        <span
-          style={{
-            fontSize: "0.75rem",
-            color: "rgba(255,255,255,0.6)",
-            fontWeight: 500,
-          }}
-        >
+        <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 500 }}>
           {plan.plan_code}
         </span>
       </div>
 
-      <div style={{ padding: "1.5rem" }}>
+      <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
         <h3
           style={{
             fontSize: "1.0625rem",
@@ -96,6 +92,7 @@ function PlanCard({ plan }: { plan: Plan }) {
                 fontSize: "0.8125rem",
                 color: "var(--text-muted)",
                 background: "var(--bg)",
+                border: "1px solid var(--border)",
                 padding: "0.375rem 0.75rem",
                 borderRadius: "100px",
               }}
@@ -112,6 +109,7 @@ function PlanCard({ plan }: { plan: Plan }) {
                 fontSize: "0.8125rem",
                 color: "var(--text-muted)",
                 background: "var(--bg)",
+                border: "1px solid var(--border)",
                 padding: "0.375rem 0.75rem",
                 borderRadius: "100px",
               }}
@@ -129,6 +127,7 @@ function PlanCard({ plan }: { plan: Plan }) {
                 fontSize: "0.8125rem",
                 color: "var(--text-muted)",
                 background: "var(--bg)",
+                border: "1px solid var(--border)",
                 padding: "0.375rem 0.75rem",
                 borderRadius: "100px",
               }}
@@ -162,14 +161,14 @@ function PlanCard({ plan }: { plan: Plan }) {
                   gap: "0.5rem",
                 }}
               >
-                <span style={{ color: "#198754", marginTop: "2px", flexShrink: 0 }}>✓</span>
+                <span style={{ color: "var(--success)", marginTop: "2px", flexShrink: 0 }}>✓</span>
                 {typeof feat === "string" ? feat : feat.text || feat.feature || ""}
               </li>
             ))}
           </ul>
         )}
 
-        <div style={{ display: "flex", gap: "0.75rem" }}>
+        <div style={{ display: "flex", gap: "0.75rem", marginTop: "auto" }}>
           <Link
             href={`/plans/${plan.slug}`}
             className="btn btn-primary btn-sm"
@@ -191,7 +190,7 @@ function PlanCard({ plan }: { plan: Plan }) {
       <div
         style={{
           padding: "0.625rem 1.25rem",
-          background: "var(--bg)",
+          background: "rgba(0,0,0,0.2)",
           borderTop: "1px solid var(--border)",
           fontSize: "0.7rem",
           color: "var(--text-muted)",
@@ -230,10 +229,7 @@ export function FeaturedPlansSection() {
   });
 
   return (
-    <section
-      className="section"
-      style={{ background: "var(--surface)", borderTop: "1px solid var(--border)" }}
-    >
+    <section className="section">
       <div className="container-site">
         <div
           style={{
@@ -246,7 +242,7 @@ export function FeaturedPlansSection() {
           }}
         >
           <div>
-            <div className="section-label">Featured Plans</div>
+            <div className="section-label left">Featured Plans</div>
             <h2 className="section-title">Popular LIC Insurance Plans</h2>
             <p
               style={{

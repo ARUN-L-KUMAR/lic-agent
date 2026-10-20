@@ -32,7 +32,7 @@ export function AgentPhoto({
         position: "relative",
         flexShrink: 0,
         background: "var(--primary-50)",
-        color: "#004B87",
+        color: "var(--primary-300)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

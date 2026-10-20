@@ -21,7 +21,7 @@ function StarRating({ rating }: { rating: number }) {
           key={i}
           size={14}
           fill={i < rating ? "#FFCC00" : "none"}
-          stroke={i < rating ? "#FFCC00" : "#D9E2EC"}
+          stroke={i < rating ? "#FFCC00" : "rgba(130,165,255,0.35)"}
         />
       ))}
     </div>
@@ -43,10 +43,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section
-      className="section"
-      style={{ background: "var(--surface)", borderTop: "1px solid var(--border)" }}
-    >
+    <section className="section">
       <div className="container-site">
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div className="section-label">Client Testimonials</div>
@@ -118,8 +115,9 @@ export function TestimonialsSection() {
                       width: 40,
                       height: 40,
                       borderRadius: "50%",
-                      background: "#004B87",
-                      color: "#FFCC00",
+                      background: "linear-gradient(135deg, rgba(59,176,255,0.3), rgba(59,176,255,0.08))",
+                      border: "1px solid rgba(59,176,255,0.45)",
+                      color: "var(--secondary)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

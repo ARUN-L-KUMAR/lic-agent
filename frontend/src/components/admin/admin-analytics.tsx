@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { chartTheme } from "@/components/admin/chart-theme";
 import apiClient from "@/lib/api-client";
 
 interface Group { name: string; count: number }
@@ -72,11 +73,11 @@ export function AdminAnalytics() {
         <div style={{ width: "100%", height: 240 }}>
           <ResponsiveContainer>
             <BarChart data={data.leads_by_day}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" tickFormatter={(d) => String(d).slice(5)} />
-              <YAxis allowDecimals={false} />
-              <Tooltip />
-              <Bar dataKey="count" fill="#0066B3" radius={[4, 4, 0, 0]} />
+              <CartesianGrid {...chartTheme.grid} />
+              <XAxis dataKey="date" tickFormatter={(d) => String(d).slice(5)} {...chartTheme.axis} />
+              <YAxis allowDecimals={false} {...chartTheme.axis} />
+              <Tooltip {...chartTheme.tooltip} />
+              <Bar dataKey="count" fill={chartTheme.bar} radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

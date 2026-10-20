@@ -1,6 +1,7 @@
 "use client";
 
 import { LogoMark } from "@/components/brand/logo";
+import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -63,10 +64,11 @@ export default function RegisterPage() {
 
   if (success) {
     return (
+      <>
+      <Header />
       <div
         style={{
-          minHeight: "100vh",
-          background: "var(--bg)",
+          minHeight: "calc(100vh - 101px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -98,14 +100,16 @@ export default function RegisterPage() {
           </Link>
         </div>
       </div>
+      </>
     );
   }
 
   return (
+    <>
+    <Header />
     <div
       style={{
-        minHeight: "100vh",
-        background: "var(--bg)",
+        minHeight: "calc(100vh - 101px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -125,7 +129,7 @@ export default function RegisterPage() {
           }}
         >
           <LogoMark size={44} />
-          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#004B87" }}>
+          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--primary-300)" }}>
             Create Account
           </span>
         </Link>
@@ -149,7 +153,7 @@ export default function RegisterPage() {
             <div
               style={{
                 background: "var(--danger-light)",
-                border: "1px solid #fca5a5",
+                border: "1px solid rgba(251,113,133,0.4)",
                 color: "var(--danger)",
                 padding: "0.875rem 1.25rem",
                 borderRadius: "var(--radius-md)",
@@ -221,12 +225,13 @@ export default function RegisterPage() {
 
           <div style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
             Already have an account?{" "}
-            <Link href="/login" style={{ color: "#004B87", fontWeight: 600, textDecoration: "none" }}>
+            <Link href="/login" style={{ color: "var(--primary-300)", fontWeight: 600, textDecoration: "none" }}>
               Sign In
             </Link>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }

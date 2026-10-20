@@ -2,33 +2,57 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { BadgeCheck, MapPin } from "lucide-react";
 import { useSiteSettings } from "@/lib/use-site-settings";
 
-/** Large cover picture on the right side of the homepage hero (falls back to nothing if no image is set). */
+/** Holographic portrait panel on the right of the homepage hero (renders nothing if no image is set). */
 export function HeroCover() {
   const site = useSiteSettings();
   const src = site.hero_image_url;
   if (!src) return null;
 
   return (
-    <Link href="/about" aria-label={`View ${site.agent_name} profile`} className="hero-cover">
-      <Image
-        src={src}
-        alt={`${site.agent_name}, LIC Agent`}
-        fill
-        priority
-        sizes="(min-width: 1024px) 45vw, 100vw"
-        style={{ objectFit: "cover", objectPosition: "center top" }}
-      />
-      {/* Blend the left edge into the hero background and darken the bottom for the caption */}
-      <div className="hero-cover-fade" />
-      <div className="hero-cover-caption">
-        <div style={{ fontWeight: 800, fontSize: "1.375rem", color: "#fff" }}>{site.agent_name}</div>
-        <div style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.85)" }}>
-          LIC Agent{site.agent_code ? ` · Agent Code ${site.agent_code}` : ""}
+    <div className="hero-visual rise rise-3">
+      <div className="hero-ring" aria-hidden="true" />
+
+      {site.agent_code && (
+        <div className="float-chip" style={{ top: "9%", left: "-9%" }}>
+          <BadgeCheck size={16} style={{ color: "var(--cyan)" }} />
+          Agent Code {site.agent_code}
         </div>
-        <div style={{ fontSize: "0.875rem", color: "#FFCC00", marginTop: "0.25rem", fontWeight: 600 }}>View profile →</div>
+      )}
+      {site.service_locations && (
+        <div className="float-chip" style={{ bottom: "20%", right: "-7%", animationDelay: "-3s" }}>
+          <MapPin size={16} style={{ color: "var(--secondary)" }} />
+          {site.service_locations}
+        </div>
+      )}
+
+      <div className="hud-frame">
+        <Link href="/about" aria-label={`View ${site.agent_name} profile`} className="hero-portrait">
+          <Image
+            src={src}
+            alt={`${site.agent_name}, LIC Agent`}
+            fill
+            priority
+            sizes="(min-width: 1024px) 430px, 90vw"
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+          />
+          <div className="hero-portrait-fade" />
+          <div className="hero-portrait-scan" aria-hidden="true" />
+          <div className="hero-portrait-caption">
+            <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.375rem", color: "#fff" }}>
+              {site.agent_name}
+            </div>
+            <div style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.8)" }}>
+              LIC Agent{site.agent_code ? ` · Agent Code ${site.agent_code}` : ""}
+            </div>
+            <div style={{ fontSize: "0.875rem", color: "var(--secondary)", marginTop: "0.25rem", fontWeight: 600 }}>
+              View profile →
+            </div>
+          </div>
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 }

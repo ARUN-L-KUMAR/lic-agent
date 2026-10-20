@@ -13,22 +13,14 @@ export function PageShell({
   return (
     <>
       <Header />
-      <main style={{ background: "var(--bg)", minHeight: "60vh" }}>
-        <section
-          style={{
-            background: "linear-gradient(135deg, #004B87 0%, #0066B3 100%)",
-            padding: "3rem 0 2rem",
-            color: "#fff",
-          }}
-        >
+      <main style={{ minHeight: "60vh" }}>
+        <section className="page-hero">
           <div className="container-site">
-            <h1 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 800, color: "#fff", marginBottom: "0.5rem" }}>
-              {title}
-            </h1>
-            {subtitle && <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1rem" }}>{subtitle}</p>}
+            <h1>{title}</h1>
+            {subtitle && <p>{subtitle}</p>}
           </div>
         </section>
-        <div className="container-site" style={{ padding: "2.5rem 1rem 4rem" }}>
+        <div className="container-site" style={{ paddingTop: "2.5rem", paddingBottom: "4rem" }}>
           {children}
         </div>
       </main>

@@ -79,7 +79,7 @@ export function PremiumCalculator() {
             gap: "0.5rem",
           }}
         >
-          <Calculator size={20} style={{ color: "#004B87" }} />
+          <Calculator size={20} style={{ color: "var(--cyan)" }} />
           Calculate Premium
         </h2>
 
@@ -114,7 +114,7 @@ export function PremiumCalculator() {
               {errors.sum_assured && (
                 <span className="form-error">{errors.sum_assured.message}</span>
               )}
-              {watch("sum_assured") && (
+              {!!watch("sum_assured") && (
                 <span className="form-hint">
                   ₹{(watch("sum_assured") || 0).toLocaleString("en-IN")}
                 </span>
@@ -182,14 +182,16 @@ export function PremiumCalculator() {
 
             <div
               style={{
-                background: "#004B87",
+                background: "linear-gradient(135deg, rgba(59,176,255,0.24), rgba(59,176,255,0.06))",
+                border: "1px solid rgba(59,176,255,0.4)",
+                boxShadow: "0 0 50px -14px rgba(59,176,255,0.6)",
                 borderRadius: "var(--radius-lg)",
                 padding: "1.75rem",
                 marginBottom: "1.5rem",
                 textAlign: "center",
               }}
             >
-              <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.875rem", marginBottom: "0.375rem" }}>
+              <div style={{ color: "var(--text-secondary)", fontSize: "0.875rem", marginBottom: "0.375rem" }}>
                 Estimated Annual Premium
               </div>
               <div
@@ -206,7 +208,7 @@ export function PremiumCalculator() {
                 <IndianRupee size={28} />
                 {result.estimated_annual_premium.toLocaleString("en-IN")}
               </div>
-              <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", marginTop: "0.375rem" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: "0.75rem", marginTop: "0.375rem" }}>
                 per year (illustrative)
               </div>
             </div>
@@ -283,10 +285,10 @@ export function PremiumCalculator() {
             style={{
               padding: "2.5rem",
               textAlign: "center",
-              border: "2px dashed var(--border)",
+              border: "1.5px dashed var(--border-strong)",
             }}
           >
-            <Calculator size={48} style={{ color: "var(--border)", marginBottom: "1rem" }} />
+            <Calculator size={48} style={{ color: "var(--border-strong)", marginBottom: "1rem" }} />
             <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "var(--text-muted)" }}>
               Fill in the details to see an estimate
             </h3>

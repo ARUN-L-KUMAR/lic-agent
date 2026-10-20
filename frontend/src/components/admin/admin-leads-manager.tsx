@@ -113,8 +113,8 @@ export function AdminLeadsManager() {
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 cursor: "pointer",
-                background: statusFilter === s ? "#004B87" : "var(--surface)",
-                borderColor: statusFilter === s ? "#004B87" : "var(--border)",
+                background: statusFilter === s ? "linear-gradient(135deg, #36A6FF, #1B6BE0)" : "var(--surface)",
+                borderColor: statusFilter === s ? "rgba(255,255,255,0.25)" : "var(--border)",
                 color: statusFilter === s ? "#fff" : "var(--text-secondary)",
               }}
             >
@@ -240,7 +240,8 @@ export function AdminLeadsManager() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0,0,0,0.5)",
+            background: "rgba(2,4,12,0.72)",
+            backdropFilter: "blur(6px)",
             zIndex: 100,
             display: "flex",
             alignItems: "center",
@@ -250,7 +251,7 @@ export function AdminLeadsManager() {
           onClick={() => setSelectedLead(null)}
         >
           <div
-            className="card"
+            className="card card-solid"
             style={{ width: "100%", maxWidth: "520px", padding: "2rem" }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -301,7 +302,7 @@ export function AdminLeadsManager() {
                     fontSize: "0.8125rem",
                     cursor: "pointer",
                     fontWeight: 500,
-                    background: selectedLead.status === status ? "#004B87" : "var(--surface)",
+                    background: selectedLead.status === status ? "linear-gradient(135deg, #36A6FF, #1B6BE0)" : "var(--surface)",
                     color: selectedLead.status === status ? "#fff" : "var(--text-secondary)",
                   }}
                 >

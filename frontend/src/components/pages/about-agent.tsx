@@ -34,7 +34,8 @@ export function AboutAgent() {
         <div
           style={{
             height: 130,
-            background: "linear-gradient(135deg, #004B87 0%, #0066B3 60%, #FFCC00 160%)",
+            background: "linear-gradient(135deg, rgba(59,176,255,0.35) 0%, rgba(34,228,255,0.15) 55%, rgba(255,204,0,0.3) 130%)",
+            borderBottom: "1px solid var(--border)",
           }}
         />
         <div style={{ padding: "0 2.5rem 2.5rem", display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
@@ -42,10 +43,10 @@ export function AboutAgent() {
             style={{
               marginTop: -95,
               borderRadius: 28,
-              boxShadow: "0 12px 32px rgba(0, 45, 90, 0.25)",
+              boxShadow: "0 16px 44px -10px rgba(59, 176, 255, 0.55)",
             }}
           >
-            <AgentPhoto width={240} height={290} radius="28px" border="6px solid #fff" />
+            <AgentPhoto width={240} height={290} radius="28px" border="4px solid rgba(255,255,255,0.9)" />
           </div>
 
           <h2 style={{ fontSize: "1.75rem", fontWeight: 800, color: "var(--text-primary)", marginTop: "1.5rem" }}>{name}</h2>

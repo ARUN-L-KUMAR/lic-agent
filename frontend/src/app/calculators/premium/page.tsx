@@ -14,19 +14,13 @@ export default function PremiumCalculatorPage() {
     <>
       <Header />
       <main>
-        <section
-          style={{ background: "#004B87", padding: "3rem 0 2rem", color: "#fff" }}
-        >
+        <section className="page-hero">
           <div className="container-site">
-            <h1 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 800, color: "#fff", marginBottom: "0.5rem" }}>
-              Premium Calculator
-            </h1>
-            <p style={{ color: "rgba(255,255,255,0.7)" }}>
-              Get an illustrative estimate of your insurance premium.
-            </p>
+            <h1>Premium Calculator</h1>
+            <p>Get an illustrative estimate of your insurance premium.</p>
           </div>
         </section>
-        <section style={{ padding: "3rem 0", background: "var(--bg)" }}>
+        <section style={{ padding: "3rem 0" }}>
           <div className="container-site">
             <PremiumCalculator />
           </div>

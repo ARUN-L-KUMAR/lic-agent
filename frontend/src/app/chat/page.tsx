@@ -16,7 +16,6 @@ export default function ChatPage() {
       <main
         style={{
           minHeight: "calc(100vh - 140px)",
-          background: "var(--bg)",
           display: "flex",
           flexDirection: "column",
         }}

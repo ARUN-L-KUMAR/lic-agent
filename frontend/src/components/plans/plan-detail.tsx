@@ -31,7 +31,7 @@ export function PlanDetail({ slug }: { slug: string }) {
   if (error || !plan) {
     return (
       <div className="container-site" style={{ padding: "3rem 1.5rem", textAlign: "center" }}>
-        <AlertCircle size={48} style={{ color: "var(--text-muted)", marginBottom: "1rem" }} />
+        <AlertCircle size={48} style={{ color: "var(--text-muted)", display: "block", margin: "0 auto 1rem" }} />
         <h2 style={{ marginBottom: "0.75rem" }}>Plan Not Found</h2>
         <p style={{ color: "var(--text-muted)", marginBottom: "1.5rem" }}>
           The plan you&apos;re looking for is not available.
@@ -46,7 +46,7 @@ export function PlanDetail({ slug }: { slug: string }) {
   return (
     <div>
       {/* Hero */}
-      <div style={{ background: "#004B87", padding: "2.5rem 0", color: "#fff" }}>
+      <div className="page-hero" style={{ padding: "2.5rem 0" }}>
         <div className="container-site">
           <Link
             href="/plans"
@@ -54,7 +54,7 @@ export function PlanDetail({ slug }: { slug: string }) {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.375rem",
-              color: "rgba(255,255,255,0.6)",
+              color: "var(--text-muted)",
               fontSize: "0.875rem",
               textDecoration: "none",
               marginBottom: "1.25rem",
@@ -62,19 +62,13 @@ export function PlanDetail({ slug }: { slug: string }) {
           >
             <ArrowLeft size={14} /> All Plans
           </Link>
-          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "0.75rem" }}>
+          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "0.75rem", alignItems: "center" }}>
             <span className="badge badge-gold">{plan.category}</span>
-            <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8125rem" }}>
-              Code: {plan.plan_code}
-            </span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.8125rem" }}>Code: {plan.plan_code}</span>
           </div>
-          <h1 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", fontWeight: 800, color: "#fff", marginBottom: "0.75rem" }}>
-            {plan.name}
-          </h1>
+          <h1 style={{ marginBottom: "0.75rem" }}>{plan.name}</h1>
           {plan.short_description && (
-            <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "1.0625rem", maxWidth: "620px", lineHeight: 1.6 }}>
-              {plan.short_description}
-            </p>
+            <p style={{ fontSize: "1.0625rem", maxWidth: "620px", lineHeight: 1.6 }}>{plan.short_description}</p>
           )}
         </div>
       </div>
@@ -98,7 +92,7 @@ export function PlanDetail({ slug }: { slug: string }) {
                     href={plan.official_reference}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: "#78350f" }}
+                    style={{ color: "#FFD479" }}
                   >
                     Official Source
                   </a>
@@ -114,7 +108,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {/* Key eligibility */}
             <div className="card" style={{ padding: "1.75rem" }}>
               <h2 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <Calendar size={18} style={{ color: "#004B87" }} />
+                <Calendar size={18} style={{ color: "var(--primary-300)" }} />
                 Eligibility Overview
               </h2>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: "1rem" }}>
@@ -161,7 +155,7 @@ export function PlanDetail({ slug }: { slug: string }) {
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.625rem" }}>
                   {plan.features.map((feat: any, i: number) => (
                     <li key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
-                      <CheckCircle size={17} style={{ color: "#198754", flexShrink: 0, marginTop: "2px" }} />
+                      <CheckCircle size={17} style={{ color: "var(--success)", flexShrink: 0, marginTop: "2px" }} />
                       <span style={{ fontSize: "0.9375rem", color: "var(--text-secondary)" }}>
                         {typeof feat === "string" ? feat : feat.text || feat.feature || ""}
                       </span>
@@ -175,7 +169,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {plan.documents_required && plan.documents_required.length > 0 && (
               <div className="card" style={{ padding: "1.75rem" }}>
                 <h2 style={{ fontSize: "1.125rem", fontWeight: 700, marginBottom: "1.25rem", display: "flex", gap: "0.5rem" }}>
-                  <FileText size={18} style={{ color: "#004B87" }} /> Documents Required
+                  <FileText size={18} style={{ color: "var(--primary-300)" }} /> Documents Required
                 </h2>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {plan.documents_required.map((doc, i) => (
@@ -217,7 +211,7 @@ export function PlanDetail({ slug }: { slug: string }) {
 
           {/* Sidebar */}
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", position: "sticky", top: "80px" }}>
-            <div className="card" style={{ padding: "1.75rem", borderTop: "4px solid #004B87" }}>
+            <div className="card" style={{ padding: "1.75rem", borderTop: "3px solid var(--primary)" }}>
               <h3 style={{ fontWeight: 700, marginBottom: "1rem" }}>Enquire About This Plan</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
                 Get accurate details, premium quotes, and personalized advice from the agent.
@@ -238,7 +232,7 @@ export function PlanDetail({ slug }: { slug: string }) {
             {plan.faq && plan.faq.length > 0 && (
               <div className="card" style={{ padding: "1.5rem" }}>
                 <h4 style={{ fontWeight: 700, marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
-                  <BookOpen size={16} style={{ color: "#004B87" }} /> FAQs
+                  <BookOpen size={16} style={{ color: "var(--primary-300)" }} /> FAQs
                 </h4>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                   {(plan.faq as any[]).slice(0, 3).map((item: any, i: number) => (

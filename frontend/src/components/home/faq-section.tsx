@@ -54,7 +54,7 @@ export function FaqSection() {
   const items = faqs || DEFAULT_FAQS;
 
   return (
-    <section className="section" style={{ background: "var(--bg)" }}>
+    <section className="section">
       <div className="container-site">
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div className="section-label">FAQ</div>
@@ -112,7 +112,7 @@ export function FaqSection() {
                   {faq.question}
                 </span>
                 {openId === faq.id ? (
-                  <ChevronUp size={18} style={{ color: "#004B87", flexShrink: 0 }} />
+                  <ChevronUp size={18} style={{ color: "var(--cyan)", flexShrink: 0 }} />
                 ) : (
                   <ChevronDown size={18} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
                 )}

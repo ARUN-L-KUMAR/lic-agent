@@ -40,19 +40,12 @@ const reasons = [
 export function WhyChooseSection() {
   const site = useSiteSettings();
   return (
-    <section className="section" style={{ background: "var(--bg)" }}>
+    <section className="section">
       <div className="container-site">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "4rem",
-            alignItems: "center",
-          }}
-        >
+        <div className="split">
           {/* Left */}
           <div>
-            <div className="section-label">Why Work With Me</div>
+            <div className="section-label left">Why Work With Me</div>
             <h2 className="section-title">
               Your Trusted LIC Insurance Partner
             </h2>
@@ -73,14 +66,8 @@ export function WhyChooseSection() {
               {reasons.map(({ icon: Icon, title, description }) => (
                 <div
                   key={title}
-                  style={{
-                    display: "flex",
-                    gap: "1rem",
-                    padding: "1.25rem",
-                    background: "var(--surface)",
-                    borderRadius: "var(--radius-lg)",
-                    border: "1px solid var(--border)",
-                  }}
+                  className="card"
+                  style={{ display: "flex", gap: "1rem", padding: "1.25rem" }}
                 >
                   <div
                     style={{
@@ -88,13 +75,14 @@ export function WhyChooseSection() {
                       height: 44,
                       borderRadius: "var(--radius-md)",
                       background: "var(--primary-50)",
+                      border: "1px solid rgba(59,176,255,0.3)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={20} style={{ color: "#004B87" }} />
+                    <Icon size={20} style={{ color: "var(--primary-300)" }} />
                   </div>
                   <div>
                     <h4
@@ -123,13 +111,10 @@ export function WhyChooseSection() {
           </div>
 
           {/* Right — agent info card */}
-          <div style={{ display: "none" }} className="why-right">
+          <div className="show-md">
             <div
-              className="card"
-              style={{
-                padding: "2rem",
-                borderTop: "4px solid #004B87",
-              }}
+              className="glow-border"
+              style={{ padding: "2rem" }}
             >
               <div style={{ marginBottom: "1.25rem" }}>
                 <AgentPhoto width={96} height={96} />
@@ -170,11 +155,6 @@ export function WhyChooseSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        @media (min-width: 900px) {
-          .why-right { display: block !important; }
-        }
-      `}</style>
     </section>
   );
 }

@@ -8,8 +8,9 @@ import {
 import apiClient from "@/lib/api-client";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer, LineChart, Line,
+  Tooltip, ResponsiveContainer,
 } from "recharts";
+import { chartTheme } from "@/components/admin/chart-theme";
 
 interface DashboardData {
   total_customers: number;
@@ -29,7 +30,7 @@ const METRIC_CARDS = (data: DashboardData) => [
     icon: Users,
     label: "Total Customers",
     value: data.total_customers.toLocaleString(),
-    color: "#004B87",
+    color: "#3BB0FF",
     bg: "var(--primary-50)",
   },
   {
@@ -37,35 +38,35 @@ const METRIC_CARDS = (data: DashboardData) => [
     label: "New Leads Today",
     value: data.new_leads_today.toString(),
     sub: `${data.new_leads_week} this week`,
-    color: "#198754",
+    color: "#34D399",
     bg: "var(--success-light)",
   },
   {
     icon: Calendar,
     label: "Appointments Today",
     value: data.appointments_today.toString(),
-    color: "#0066B3",
-    bg: "#E8F3FB",
+    color: "#22E4FF",
+    bg: "rgba(34, 228, 255, 0.12)",
   },
   {
     icon: MessageSquare,
     label: "Unread Chats",
     value: data.unread_chats.toString(),
-    color: data.unread_chats > 0 ? "var(--danger)" : "#198754",
+    color: data.unread_chats > 0 ? "var(--danger)" : "#34D399",
     bg: data.unread_chats > 0 ? "var(--danger-light)" : "var(--success-light)",
   },
   {
     icon: Brain,
     label: "AI Sessions",
     value: data.ai_sessions.toLocaleString(),
-    color: "#7c3aed",
-    bg: "#ede9fe",
+    color: "#A78BFA",
+    bg: "rgba(167, 139, 250, 0.14)",
   },
   {
     icon: Shield,
     label: "Open Enquiries",
     value: data.open_enquiries.toString(),
-    color: "#D9A900",
+    color: "#FFCC00",
     bg: "var(--warning-light)",
   },
 ];
@@ -189,11 +190,11 @@ export function AdminOverview() {
           {stats.leads_by_day && stats.leads_by_day.length > 0 ? (
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={stats.leads_by_day}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Bar dataKey="count" fill="#004B87" radius={[4, 4, 0, 0]} />
+                <CartesianGrid {...chartTheme.grid} />
+                <XAxis dataKey="date" {...chartTheme.axis} />
+                <YAxis {...chartTheme.axis} />
+                <Tooltip {...chartTheme.tooltip} />
+                <Bar dataKey="count" fill={chartTheme.bar} radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           ) : (
@@ -236,13 +237,14 @@ export function AdminOverview() {
                       width: 24,
                       height: 24,
                       background: i === 0 ? "#FFCC00" : "var(--bg)",
+                      border: i === 0 ? "none" : "1px solid var(--border)",
                       borderRadius: "50%",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontSize: "0.75rem",
                       fontWeight: 700,
-                      color: i === 0 ? "#fff" : "var(--text-muted)",
+                      color: i === 0 ? "#1A1300" : "var(--text-muted)",
                       flexShrink: 0,
                     }}
                   >

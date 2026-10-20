@@ -1,6 +1,7 @@
 "use client";
 
 import { LogoMark } from "@/components/brand/logo";
+import { Header } from "@/components/layout/header";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -56,10 +57,11 @@ export default function LoginPage() {
   };
 
   return (
+    <>
+    <Header />
     <div
       style={{
-        minHeight: "100vh",
-        background: "var(--bg)",
+        minHeight: "calc(100vh - 101px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -80,7 +82,7 @@ export default function LoginPage() {
           }}
         >
           <LogoMark size={44} />
-          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#004B87" }}>
+          <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--primary-300)" }}>
             LIC Agent Platform
           </span>
         </Link>
@@ -113,7 +115,7 @@ export default function LoginPage() {
               className="disclaimer-box"
               style={{
                 background: "var(--danger-light)",
-                border: "1px solid #fca5a5",
+                border: "1px solid rgba(251,113,133,0.4)",
                 color: "var(--danger)",
                 marginBottom: "1.25rem",
               }}
@@ -158,7 +160,7 @@ export default function LoginPage() {
                     href="/forgot-password"
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#004B87",
+                      color: "var(--primary-300)",
                       textDecoration: "none",
                       fontWeight: 500,
                     }}
@@ -222,7 +224,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{" "}
             <Link
               href="/register"
-              style={{ color: "#004B87", fontWeight: 600, textDecoration: "none" }}
+              style={{ color: "var(--primary-300)", fontWeight: 600, textDecoration: "none" }}
             >
               Register
             </Link>
@@ -248,5 +250,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

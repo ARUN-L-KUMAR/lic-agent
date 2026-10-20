@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/ui/toaster";
+import { Scene } from "@/components/layout/scene";
+import { PointerGlow } from "@/components/layout/pointer-glow";
 import { getSiteSettings } from "@/lib/agent-info";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const display = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display-face",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,12 +70,14 @@ export default async function RootLayout({
     employee: { "@type": "Person", name: site.agent_name, jobTitle: "LIC Agent" },
   };
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${display.variable}`}>
       <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Scene />
+        <PointerGlow />
         <Providers>
           {children}
           <Toaster />

@@ -132,7 +132,8 @@ export function ChatInterface() {
         {/* Header */}
         <div
           style={{
-            background: "#004B87",
+            background: "linear-gradient(180deg, rgba(59,176,255,0.16), rgba(59,176,255,0.05))",
+            borderBottom: "1px solid var(--border-strong)",
             padding: "1rem 1.25rem",
             display: "flex",
             alignItems: "center",
@@ -150,8 +151,8 @@ export function ChatInterface() {
                 cursor: "pointer",
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                background: mode === "ai" ? "#FFCC00" : "rgba(255,255,255,0.1)",
-                color: "#fff",
+                background: mode === "ai" ? "linear-gradient(135deg, #FFDD33, #FFB800)" : "rgba(255,255,255,0.06)",
+                color: mode === "ai" ? "#1A1300" : "var(--text-secondary)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.375rem",
@@ -169,8 +170,8 @@ export function ChatInterface() {
                 cursor: "pointer",
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                background: mode === "agent" ? "#FFCC00" : "rgba(255,255,255,0.1)",
-                color: "#fff",
+                background: mode === "agent" ? "linear-gradient(135deg, #FFDD33, #FFB800)" : "rgba(255,255,255,0.06)",
+                color: mode === "agent" ? "#1A1300" : "var(--text-secondary)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.375rem",
@@ -186,7 +187,7 @@ export function ChatInterface() {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "rgba(255,255,255,0.6)",
+              color: "var(--text-muted)",
               padding: "0.25rem",
             }}
             title="New conversation"
@@ -201,9 +202,9 @@ export function ChatInterface() {
             style={{
               padding: "0.625rem 1rem",
               background: "var(--warning-light)",
-              borderBottom: "1px solid #fcd34d",
+              borderBottom: "1px solid rgba(251,191,36,0.3)",
               fontSize: "0.75rem",
-              color: "#92400e",
+              color: "#F6D58A",
               display: "flex",
               gap: "0.5rem",
               alignItems: "flex-start",
@@ -232,12 +233,14 @@ export function ChatInterface() {
               style={{
                 width: 72,
                 height: 72,
-                background: "#004B87",
+                background: "var(--primary-50)",
+                border: "1px solid rgba(59,176,255,0.4)",
+                boxShadow: "0 0 36px -6px rgba(59,176,255,0.6)",
                 borderRadius: "50%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#FFCC00",
+                color: "var(--cyan)",
               }}
             >
               <User size={36} />
@@ -296,7 +299,7 @@ export function ChatInterface() {
                         color: "var(--text-muted)",
                       }}
                     >
-                      <Bot size={13} style={{ color: "#004B87" }} />
+                      <Bot size={13} style={{ color: "var(--cyan)" }} />
                       AI Assistant
                     </div>
                   )}
@@ -343,7 +346,7 @@ export function ChatInterface() {
                             background: "var(--surface)",
                             border: "1px solid var(--primary-200)",
                             borderRadius: "100px",
-                            color: "#004B87",
+                            color: "var(--primary-300)",
                             cursor: "pointer",
                             fontWeight: 500,
                           }}
@@ -435,11 +438,18 @@ export function ChatInterface() {
           </div>
         </div>
 
-        <div className="card" style={{ padding: "1.25rem", background: "#004B87" }}>
-          <h4 style={{ fontSize: "0.875rem", fontWeight: 700, marginBottom: "0.75rem", color: "#FFCC00" }}>
+        <div
+          className="card"
+          style={{
+            padding: "1.25rem",
+            background: "linear-gradient(135deg, rgba(59,176,255,0.22), rgba(255,204,0,0.08))",
+            borderColor: "rgba(59,176,255,0.4)",
+          }}
+        >
+          <h4 style={{ fontSize: "0.875rem", fontWeight: 700, marginBottom: "0.75rem", color: "var(--secondary)" }}>
             Need Expert Advice?
           </h4>
-          <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.7)", marginBottom: "1rem", lineHeight: 1.6 }}>
+          <p style={{ fontSize: "0.8125rem", color: "var(--text-secondary)", marginBottom: "1rem", lineHeight: 1.6 }}>
             The AI provides general information. For personalized advice and accurate premiums, consult the agent.
           </p>
           <a

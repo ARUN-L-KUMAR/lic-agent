@@ -49,10 +49,10 @@ export function Toaster() {
   };
 
   const colors = {
-    success: { bg: "#d1fae5", color: "#198754", border: "#6ee7b7" },
-    error: { bg: "#fee2e2", color: "#D92D20", border: "#fca5a5" },
-    info: { bg: "#E8F3FB", color: "#0066B3", border: "#93c5fd" },
-    warning: { bg: "#fef3c7", color: "#D9A900", border: "#fcd34d" },
+    success: { bg: "rgba(10, 36, 30, 0.92)", color: "#34D399", border: "rgba(52,211,153,0.45)" },
+    error: { bg: "rgba(44, 14, 22, 0.92)", color: "#FB7185", border: "rgba(251,113,133,0.45)" },
+    info: { bg: "rgba(9, 24, 48, 0.92)", color: "#3BB0FF", border: "rgba(59,176,255,0.45)" },
+    warning: { bg: "rgba(42, 32, 8, 0.92)", color: "#FBBF24", border: "rgba(251,191,36,0.45)" },
   };
 
   return (
@@ -80,7 +80,8 @@ export function Toaster() {
                 border: `1px solid ${c.border}`,
                 borderRadius: "var(--radius-lg)",
                 padding: "1rem 1.25rem",
-                boxShadow: "var(--shadow-lg)",
+                boxShadow: `var(--shadow-lg), 0 0 40px -12px ${c.color}`,
+                backdropFilter: "blur(14px)",
                 display: "flex",
                 gap: "0.75rem",
                 alignItems: "flex-start",

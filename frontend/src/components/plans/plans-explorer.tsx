@@ -51,7 +51,8 @@ function PlanListCard({ plan }: { plan: PlanSummary }) {
         style={{
           width: 6,
           alignSelf: "stretch",
-          background: "#004B87",
+          background: "linear-gradient(180deg, var(--primary), var(--cyan))",
+          boxShadow: "0 0 14px rgba(59,176,255,0.7)",
           borderRadius: "3px",
           flexShrink: 0,
         }}
@@ -257,9 +258,10 @@ export function PlansExplorer() {
                 fontWeight: 500,
                 cursor: "pointer",
                 transition: "all 0.15s ease",
-                background: category === cat ? "#004B87" : "var(--surface)",
-                borderColor: category === cat ? "#004B87" : "var(--border)",
+                background: category === cat ? "linear-gradient(135deg, #36A6FF, #1B6BE0)" : "var(--surface)",
+                borderColor: category === cat ? "rgba(255,255,255,0.25)" : "var(--border)",
                 color: category === cat ? "#fff" : "var(--text-secondary)",
+                boxShadow: category === cat ? "0 6px 22px -8px rgba(59,176,255,0.7)" : "none",
               }}
             >
               {cat}
